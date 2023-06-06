@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopWebApi", "ShopWebApi\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{C21F7A89-AF79-4EF5-A469-8FDE80B1BC81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLogic", "BussinessLogic\BussinessLogic.csproj", "{CC02727C-58A9-4801-A0FC-DE2E7D33F71A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C21F7A89-AF79-4EF5-A469-8FDE80B1BC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C21F7A89-AF79-4EF5-A469-8FDE80B1BC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C21F7A89-AF79-4EF5-A469-8FDE80B1BC81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC02727C-58A9-4801-A0FC-DE2E7D33F71A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC02727C-58A9-4801-A0FC-DE2E7D33F71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC02727C-58A9-4801-A0FC-DE2E7D33F71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC02727C-58A9-4801-A0FC-DE2E7D33F71A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
