@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using Data.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,6 +172,25 @@ namespace Data.Data
                     CategoryId = 6
                 },
                 
+            };
+        }
+
+        public static List<Role> GetRoles()
+        {
+            return new List<Role>
+            {
+                new Role()
+                {
+                    Id = 1,
+                    Name = "User",
+                    NormalizedName = "User"
+                },
+                new Role()
+                {
+                    Id = 2,
+                    Name = "Admin",
+                    NormalizedName = "Admin"
+                }
             };
         }
     }

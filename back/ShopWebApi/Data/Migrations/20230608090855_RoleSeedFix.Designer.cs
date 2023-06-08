@@ -4,6 +4,7 @@ using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230608090855_RoleSeedFix")]
+    partial class RoleSeedFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +59,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -290,7 +293,7 @@ namespace Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new

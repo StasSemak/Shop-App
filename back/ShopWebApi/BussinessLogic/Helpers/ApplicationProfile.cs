@@ -1,6 +1,8 @@
 ﻿using BussinessLogic.DTOs.Category;
+using BussinessLogic.DTOs.Identity;
 using BussinessLogic.DTOs.Product;
 using Data.Models;
+using Data.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,16 @@ namespace BussinessLogic.Helpers
 
             CreateMap<ProductCreateDto, Product>()
                 .ForMember(x => x.CategoryId, o => o.Ignore())
+                .ForMember(x => x.Image, o => o.Ignore());
+
+            CreateMap<User, UserItemDto>()
+                .ForMember(x => x.Role, o => o.Ignore());
+            CreateMap<UserItemDto, User>();
+
+            CreateMap<UserRegisterDto, User>()
+                .ForMember(x => x.UserRoles, o => o.Ignore())
+                .ForMember(x => x.NormalizedEmail, o => o.MapFrom(s => s.Email))
+                .ForMember(x => x.NormalizedUserName, o => o.MapFrom(s => s.UserName))
                 .ForMember(x => x.Image, o => o.Ignore());
         }
     }

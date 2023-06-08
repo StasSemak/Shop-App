@@ -4,6 +4,7 @@ using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230607182940_AddUserImageAndRoleSeed")]
+    partial class AddUserImageAndRoleSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 6, 8, 9, 8, 55, 19, DateTimeKind.Utc).AddTicks(2373));
+                        .HasDefaultValue(new DateTime(2023, 6, 7, 18, 29, 40, 458, DateTimeKind.Utc).AddTicks(9260));
 
                     b.Property<string>("Description")
                         .HasMaxLength(4080)
@@ -56,7 +59,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -153,7 +156,7 @@ namespace Data.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Admin"
+                            Name = "Role"
                         });
                 });
 
@@ -257,7 +260,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 6, 8, 9, 8, 55, 19, DateTimeKind.Utc).AddTicks(5639));
+                        .HasDefaultValue(new DateTime(2023, 6, 7, 18, 29, 40, 459, DateTimeKind.Utc).AddTicks(2703));
 
                     b.Property<string>("Description")
                         .HasMaxLength(4080)
@@ -290,7 +293,7 @@ namespace Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
