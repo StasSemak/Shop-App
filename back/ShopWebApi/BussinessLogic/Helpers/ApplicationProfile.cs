@@ -1,6 +1,7 @@
 ﻿using BussinessLogic.DTOs.Category;
 using BussinessLogic.DTOs.Identity;
 using BussinessLogic.DTOs.Product;
+using BussinessLogic.DTOs.Review;
 using Data.Models;
 using Data.Models.Identity;
 using System;
@@ -40,6 +41,14 @@ namespace BussinessLogic.Helpers
                 .ForMember(x => x.NormalizedEmail, o => o.MapFrom(s => s.Email))
                 .ForMember(x => x.NormalizedUserName, o => o.MapFrom(s => s.UserName))
                 .ForMember(x => x.Image, o => o.Ignore());
+
+            CreateMap<Review, ReviewItemDto>()
+                .ForMember(x => x.UserName, o => o.MapFrom(s => s.User.UserName))
+                .ForMember(x => x.UserId, o => o.MapFrom(s => s.UserId));
+            CreateMap<ReviewItemDto, Review>()
+                .ForMember(x => x.User, o => o.Ignore());
+
+            CreateMap<ReviewCreateDto, Review>();
         }
     }
 }

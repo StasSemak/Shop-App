@@ -52,6 +52,7 @@ namespace BussinessLogic.Services
                 .Where(x => x.Id == model.CategoryId)
                 .SingleOrDefaultAsync();
             if (category == null) throw new Exception("Product category not found!");
+            product.CategoryId = category.Id;
             product.Image = ImageWorker.SaveImage(model.ImageBase64);
 
             await context.Products.AddAsync(product);

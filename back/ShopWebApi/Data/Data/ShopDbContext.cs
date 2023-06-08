@@ -69,6 +69,24 @@ namespace Data.Data
                     .IsRequired();
             });
 
+            builder.Entity<Review>().HasOne(x => x.Product)
+                                    .WithMany(x => x.Reviews)
+                                    .HasForeignKey(x => x.ProductId)
+                                    .HasPrincipalKey(x => x.Id)
+                                    .IsRequired();
+            builder.Entity<Review>().HasOne(x => x.User)
+                                    .WithMany(x => x.Reviews)
+                                    .HasForeignKey(x => x.ProductId)
+                                    .HasPrincipalKey(x => x.Id)
+                                    .IsRequired();
+            builder.Entity<Review>().Property(x => x.Text)
+                                    .HasMaxLength(4080);
+            builder.Entity<Review>().Property(x => x.Date)
+                                    .HasDefaultValue(DateTime.UtcNow);
+            builder.Entity<Review>().Property(x => x.IsDelete)
+                                    .HasDefaultValue(false);
+                                    
+
             builder.Entity<Category>().HasData(MockData.GetCategories());
             builder.Entity<Product>().HasData(MockData.GetProducts());
             builder.Entity<Role>().HasData(MockData.GetRoles());
@@ -76,5 +94,6 @@ namespace Data.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }
