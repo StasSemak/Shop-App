@@ -13,7 +13,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connStr = builder.Configuration.GetConnectionString("LocalDb");
+string connStrName;
+if (builder.Environment.IsDevelopment())
+{
+    connStrName = "LocalDb";
+}
+else connStrName = "SommeDb";
+string connStr = builder.Configuration.GetConnectionString(connStrName);
+
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlServer(connStr));
 
 builder.Services.AddIdentity<User, Role>(options =>
