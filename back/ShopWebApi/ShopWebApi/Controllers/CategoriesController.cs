@@ -85,5 +85,19 @@ namespace ShopWebApi.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpPost("search")]
+        public async Task<IActionResult> GetByName([FromBody]string name)
+        {
+            try
+            {
+                var categories = await service.GetByName(name);
+                return Ok(categories);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }

@@ -85,5 +85,33 @@ namespace ShopWebApi.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpGet("category/{id}")]
+        public async Task<IActionResult> GetByCategory([FromRoute]int id)
+        {
+            try
+            {
+                var products = await service.GetByCategory(id);
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpPost("search")]
+        public async Task<IActionResult> GetBySearchRequest([FromBody]ProductSearchDto model)
+        {
+            try
+            {
+                var products = await service.GetBySearchRequest(model);
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using BussinessLogic.DTOs.Category;
 using BussinessLogic.Helpers;
 using BussinessLogic.Interfaces;
@@ -88,6 +89,15 @@ namespace BussinessLogic.Services
             category.IsDelete = true;
             context.Categories.Update(category);
             await context.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<CategoryItemDto>> GetByName(string name)
+        {
+            var categories = await context.Categories
+                .Where(x => x.IsDelete == false)
+                .Where(x => x.Name.Contains(name))
+                .ToListAsync();
+            return mapper.Map<List<CategoryItemDto>>(categories);
         }
     }
 }

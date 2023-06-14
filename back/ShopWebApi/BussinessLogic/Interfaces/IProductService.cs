@@ -14,5 +14,7 @@ namespace BussinessLogic.Interfaces
         Task<ProductItemDto> CreateAsync(ProductCreateDto model);
         Task<ProductItemDto> UpdateAsync(ProductUpdateDto model);
         Task DeleteAsync(int id);
+        Task<ICollection<ProductItemDto>> GetByCategory(int id);
+        Task<ICollection<ProductItemDto>> GetBySearchRequest(ProductSearchDto model);
     }
 }

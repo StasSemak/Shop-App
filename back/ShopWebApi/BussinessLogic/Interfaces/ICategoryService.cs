@@ -14,5 +14,6 @@ namespace BussinessLogic.Interfaces
         Task<CategoryItemDto> CreateAsync(CategoryCreateDto model);
         Task<CategoryItemDto> UpdateAsync(CategoryUpdateDto model);
         Task DeleteAsync(int id);
+        Task<ICollection<CategoryItemDto>> GetByName(string name);
     }
 }

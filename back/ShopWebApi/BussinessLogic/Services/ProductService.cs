@@ -105,5 +105,31 @@ namespace BussinessLogic.Services
             context.Products.Update(product);
             await context.SaveChangesAsync();
         }
+
+        public async Task<ICollection<ProductItemDto>> GetByCategory(int id)
+        {
+            var products = await context.Products
+                .Where(x => x.IsDelete == false)
+                .Where(x => x.CategoryId == id)
+                .Include(x => x.Category)
+                .ToListAsync();
+            return mapper.Map<List<ProductItemDto>>(products);
+        }
+
+        public async Task<ICollection<ProductItemDto>> GetBySearchRequest(ProductSearchDto model)
+        {
+            var query = context.Products
+                .Where(x => x.IsDelete == false)
+                .Where(x => x.Name.Contains(model.Name))
+                .Where(x => x.Price > model.MinPrice);
+            if (model.MaxPrice != 0) query = query.Where(x => x.Price < model.MaxPrice);
+            if (model.CategoryId != 0) query = query.Where(x => x.CategoryId == model.CategoryId);
+            
+            var products = await query
+                .Include(x => x.Category)
+                .ToListAsync();
+
+            return mapper.Map<List<ProductItemDto>>(products);
+        }
     }
 }
