@@ -32,11 +32,11 @@ namespace ShopWebApi.Controllers
         }
 
         [HttpGet("product/{id}")]
-        public async Task<IActionResult> GetByProduct([FromRoute]int productId)
+        public async Task<IActionResult> GetByProduct([FromRoute]int id)
         {
             try
             {
-                var reviews = await service.GetByProductAsync(productId);
+                var reviews = await service.GetByProductAsync(id);
                 return Ok(reviews);
             }
             catch (Exception ex)

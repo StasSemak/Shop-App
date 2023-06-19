@@ -44,7 +44,8 @@ namespace BussinessLogic.Helpers
 
             CreateMap<Review, ReviewItemDto>()
                 .ForMember(x => x.UserName, o => o.MapFrom(s => s.User.UserName))
-                .ForMember(x => x.UserId, o => o.MapFrom(s => s.UserId));
+                .ForMember(x => x.UserId, o => o.MapFrom(s => s.UserId))
+                .ForMember(x => x.Date, o => o.MapFrom(s => s.Date.ToShortDateString()));
             CreateMap<ReviewItemDto, Review>()
                 .ForMember(x => x.User, o => o.Ignore());
 
