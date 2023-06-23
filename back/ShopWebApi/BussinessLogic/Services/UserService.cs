@@ -24,15 +24,15 @@ namespace BussinessLogic.Services
         private readonly ShopDbContext context;
         private readonly IMapper mapper;
         private readonly UserManager<User> userManager;
-        private readonly IConfiguration configuration;
+        private readonly SignInManager<User> signInManager;
 
         public UserService(ShopDbContext context, IMapper mapper, UserManager<User> userManager,
-            IConfiguration configuration)
+            SignInManager<User> signInManager)
         {
             this.context = context;
             this.mapper = mapper;
             this.userManager = userManager;
-            this.configuration = configuration;
+            this.signInManager = signInManager;
         }
 
         public async Task<UserItemDto> GetUserAsync(int id)
@@ -79,7 +79,7 @@ namespace BussinessLogic.Services
             result = await userManager.AddToRoleAsync(user, model.Role);
         }
 
-        public async Task<string> LoginAsync(UserLoginDto model)
+        public async Task<UserItemDto> LoginAsync(UserLoginDto model)
         {
             var user = await userManager.FindByEmailAsync(model.Email);
             if (user == null) throw new Exception("User not found!");
@@ -89,31 +89,17 @@ namespace BussinessLogic.Services
                 throw new Exception("Incorrect email or password!");
             }
 
-            var token = await CreateToken(user);
-            return token;
-        }
+            await signInManager.SignInAsync(user, true);
 
-        public async Task<string> CreateToken(User user)
-        {
-            IList<string> roles = await userManager.GetRolesAsync(user);
-            List<Claim> claims = new List<Claim>()
-            {
-                new Claim("name", user.Email),
-                new Claim("image", user.Image ?? "user-placeholder.jpg")
-            };
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim("roles", role));
-            }
-            var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<String>("JWTSecretKey")));
-            var signinCredentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256);
+            var userRole = await context.UserRoles
+                .Where(x => x.UserId == user.Id)
+                .FirstOrDefaultAsync();
+            var role = await context.Roles
+                .FindAsync(userRole.RoleId);
 
-            var jwt = new JwtSecurityToken(
-                signingCredentials: signinCredentials,
-                expires: DateTime.Now.AddDays(10),
-                claims: claims
-            );
-            return new JwtSecurityTokenHandler().WriteToken(jwt);
+            var userDto = mapper.Map<UserItemDto>(user);
+            userDto.Role = role.Name;
+            return userDto;
         }
     }
 }

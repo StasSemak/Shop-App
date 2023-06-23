@@ -11,8 +11,7 @@ namespace BussinessLogic.Interfaces
     public interface IUserService
     {
         Task RegisterAsync(UserRegisterDto model);
-        Task<string> LoginAsync(UserLoginDto model);
+        Task<UserItemDto> LoginAsync(UserLoginDto model);
         Task<UserItemDto> GetUserAsync(int id);
-        Task<string> CreateToken(User user);
     }
 }

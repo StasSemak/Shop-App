@@ -33,27 +33,6 @@ builder.Services.AddIdentity<User, Role>(options =>
     options.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<ShopDbContext>().AddDefaultTokenProviders();
 
-var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<String>("JWTSecretKey")));
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(conf =>
-{
-    conf.RequireHttpsMetadata = false;
-    conf.SaveToken = true;
-    conf.TokenValidationParameters = new TokenValidationParameters()
-    {
-        IssuerSigningKey = signinKey,
-        ValidateAudience = false,
-        ValidateIssuer = false,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ClockSkew = TimeSpan.Zero
-    };
-});
-
 string dir;
 if(builder.Environment.IsDevelopment())
 {

@@ -49,8 +49,8 @@ namespace ShopWebApi.Controllers
         {
             try
             {
-                var token = await service.LoginAsync(model);
-                return Ok(token);
+                var user = await service.LoginAsync(model);
+                return Ok(user);
             }
             catch (Exception ex)
             {
