@@ -1,4 +1,6 @@
 import Link from "next/link";
+import HeroIcon from "../icons/heroicon";
+import Navbar from "./headerNavbar";
 
 const Header = () => {
     return(
@@ -9,10 +11,7 @@ const Header = () => {
                     Shop App
                 </Link>
             </h1>
-            <nav className="flex gap-3">
-                <Link href="/basket">Basket</Link>
-                <Link href="/auth/login">Profile</Link>
-            </nav>
+            <Navbar/>
         </header>
     );
 }

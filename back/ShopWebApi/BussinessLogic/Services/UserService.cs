@@ -55,6 +55,10 @@ namespace BussinessLogic.Services
         {
             var user = mapper.Map<User>(model);
 
+            if (!CheckUserEmail(model.Email))
+                throw new Exception("Account with this email already exist!");
+            if (!CheckUserUsername(model.UserName))
+                throw new Exception("Account with this username already exist!");
             if (model.Password != model.ConfirmPassword)
                 throw new Exception("Passwords doesn't match!");
 
@@ -77,6 +81,21 @@ namespace BussinessLogic.Services
                 throw new Exception(exMessage);
             }
             result = await userManager.AddToRoleAsync(user, model.Role);
+        }
+
+        private bool CheckUserEmail(string email)
+        {
+            var emailQueryResult = context.Users
+                .Where(x => x.Email == email)
+                .Count();
+            return emailQueryResult != 0;
+        }
+        private bool CheckUserUsername(string username)
+        {
+            var usernameQueryResult = context.Users
+                .Where(x => x.UserName == username)
+                .Count();
+            return usernameQueryResult != 0;
         }
 
         public async Task<UserItemDto> LoginAsync(UserLoginDto model)
