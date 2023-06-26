@@ -88,14 +88,14 @@ namespace BussinessLogic.Services
             var emailQueryResult = context.Users
                 .Where(x => x.Email == email)
                 .Count();
-            return emailQueryResult != 0;
+            return emailQueryResult == 0;
         }
         private bool CheckUserUsername(string username)
         {
             var usernameQueryResult = context.Users
                 .Where(x => x.UserName == username)
                 .Count();
-            return usernameQueryResult != 0;
+            return usernameQueryResult == 0;
         }
 
         public async Task<UserItemDto> LoginAsync(UserLoginDto model)

@@ -18,3 +18,10 @@ export interface ReviewItem {
     username: string;
     userId: number;
 }
+
+export interface CreateReviewItem {
+    text: string;
+    mark: number;
+    productId: number;
+    userId: number;
+}

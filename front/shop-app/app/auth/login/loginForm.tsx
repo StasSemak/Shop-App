@@ -1,16 +1,12 @@
 'use client';
 
+import { LoginItem, UserItem, logIn } from "@/data/users";
 import { login } from "@/redux/features/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-
-interface LoginItem {
-    email: string;
-    password: string;
-}
 
 const LoginForm = () => {
     const [loginData, setLoginData] = useState<LoginItem>({
@@ -22,19 +18,15 @@ const LoginForm = () => {
        setLoginData({...loginData, [e.target.name]: e.target.value});
     }
     
-    const dispatch = useAppDispatch();
     const router = useRouter();
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        axios.post("https://localhost:7187/api/users/login", loginData)
+        axios.post<UserItem>("https://localhost:7187/api/users/login", loginData)
             .then(res => {
-                dispatch(login());
-                
-                localStorage.setItem("loggedUser", JSON.stringify(res.data));
-
-                router.push("/");
+                logIn(res.data);
+                router.push("/auth/profile");
             })
             .catch(err => {
                 console.log(err);

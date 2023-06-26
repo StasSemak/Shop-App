@@ -1,20 +1,12 @@
 'use client';
 
 import HeroIcon from "@/components/icons/heroicon";
+import { RegisterItem } from "@/data/users";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { useFilePicker } from "use-file-picker";
-
-interface RegisterItem {
-    userName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    role: string;
-    imageBase64: string;
-}
 
 const RegisterForm = () => {
     const [registerData, setRegisterData] = useState<RegisterItem>({

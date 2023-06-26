@@ -1,5 +1,5 @@
 import { ReviewItem } from "@/data/reviews";
-import { HeroIcon } from "../icons/heroicon";
+import HeroIcon from "../icons/heroicon";
 
 function ReviewCard({review}:{review:ReviewItem}) {
     return(

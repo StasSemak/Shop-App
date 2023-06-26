@@ -2,10 +2,10 @@
 
 import Link from "next/link"
 import HeroIcon from "../icons/heroicon"
-import { useAppSelector } from "@/redux/hooks";
+import { isUserLogged } from "@/data/users";
 
 const Navbar = () => {
-    const isLogged = useAppSelector((state) => state.authReducer.isLogged);
+    const isLogged = isUserLogged();
 
     return(
         <nav className="flex gap-5">
