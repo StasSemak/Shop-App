@@ -77,7 +77,7 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseHttpsRedirection();
 
 app.UseCors(builder => builder
-    .AllowAnyOrigin()
+    .WithOrigins("https://localhost:4001", "http://localhost:3001")
     .SetIsOriginAllowedToAllowWildcardSubdomains()
     .AllowAnyMethod()
     .AllowAnyHeader()

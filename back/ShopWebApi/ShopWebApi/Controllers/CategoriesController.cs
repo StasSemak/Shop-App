@@ -99,5 +99,19 @@ namespace ShopWebApi.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpGet("id/{name}")]
+        public async Task<IActionResult> GetIdByName([FromRoute]string name)
+        {
+            try
+            {
+                var id = await service.GetIdByName(name);
+                return Ok(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }

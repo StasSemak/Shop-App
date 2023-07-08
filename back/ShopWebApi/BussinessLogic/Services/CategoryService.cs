@@ -99,5 +99,14 @@ namespace BussinessLogic.Services
                 .ToListAsync();
             return mapper.Map<List<CategoryItemDto>>(categories);
         }
+
+        public async Task<int> GetIdByName(string name)
+        {
+            var category = await context.Categories
+                .Where(x => x.IsDelete == false)
+                .Where(x => x.Name == name)
+                .SingleOrDefaultAsync();
+            return category.Id;
+        }
     }
 }
