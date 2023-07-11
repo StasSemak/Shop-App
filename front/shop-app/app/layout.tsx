@@ -15,9 +15,9 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
   return (
     <html lang="en">
        <Providers>
-        <body className={inter.className + " relative min-h-screen bg-blue-50"}>
+        <body className={inter.className + " bg-blue-50 h-screen flex flex-col"}>
             <Header/>
-            <main className='mx-5 mt-2'>
+            <main className='mx-5 mt-2' style={{flex: "1 0 auto"}}>
               {children}
             </main>
             <Footer/>
