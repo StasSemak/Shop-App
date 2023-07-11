@@ -138,6 +138,7 @@ const EditForm = ({categories, fetchedProduct, catId}:
                                     src={imageUrl(product.image)}
                                     alt={product.name}
                                     fill
+                                    sizes="33vw"
                                     className="object-contain rounded-md"
                                 />
                             </div>

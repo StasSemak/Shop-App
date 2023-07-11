@@ -14,7 +14,7 @@ const ProductListItem = ({product}:{product:ProductItem}) => {
     const deleteHandler = () => {
         if(confirm(`You surely want to delete product '${product.name}'?`)) {
             axios.delete(`http://shop-next-api.somee.com/api/products/${product.id}`)
-                .then(res => {
+                .then(() => {
                     router.refresh();
                 })
                 .catch(err => {
@@ -33,6 +33,7 @@ const ProductListItem = ({product}:{product:ProductItem}) => {
                     src={imageUrl(product.image)}
                     alt={product.name}
                     fill
+                    sizes="20vw"
                     className="object-contain"
                 />
             </div> 

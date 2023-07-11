@@ -14,6 +14,7 @@ function ProductCard ({product} : {product:ProductItem}) {
                     alt={product.name}
                     className="object-contain"
                     fill
+                    sizes="33vw"
                 />
             </div>
             <h2 className="text-md ml-1 mt-2">{product.name}</h2>

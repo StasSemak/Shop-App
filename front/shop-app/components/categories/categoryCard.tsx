@@ -13,6 +13,7 @@ const CategoryCard = ({name, imagePath} : {name:string, imagePath:string}) => {
                     alt={name}
                     className="object-cover rounded-lg"
                     fill
+                    sizes="40vw"
                 />
             </div>
             <p className="pt-1">{name}</p>

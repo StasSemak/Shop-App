@@ -105,6 +105,7 @@ const EditCategory = ({params}:{params:{category:number}}) => {
                                     src={imageUrl(category.image)}
                                     alt={category.name}
                                     fill
+                                    sizes="33vw"
                                     className="object-contain rounded-md"
                                 />
                             </div>

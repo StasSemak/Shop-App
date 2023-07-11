@@ -20,6 +20,7 @@ async function Product ({params} : {params: {product:number}}) {
                         alt={product.name} 
                         className="object-contain"
                         fill
+                        sizes="50vw"
                     />
                 </div>
                 <div>

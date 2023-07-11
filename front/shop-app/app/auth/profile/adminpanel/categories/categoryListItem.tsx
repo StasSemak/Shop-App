@@ -14,7 +14,7 @@ const CategoryListItem = ({category}:{category:CategoryItem}) => {
     const deleteHandler = () => {
         if(confirm(`You surely want to delete category '${category.name}'?`)) {
             axios.delete(`http://shop-next-api.somee.com/api/categories/${category.id}`)
-                .then(res => {
+                .then(() => {
                     router.refresh();
                 })
                 .catch(err => {
@@ -35,6 +35,7 @@ const CategoryListItem = ({category}:{category:CategoryItem}) => {
                     src={imageUrl(category.image)}
                     alt={category.name}
                     fill
+                    sizes="20vw"
                     className="object-contain"
                 />
             </div>
