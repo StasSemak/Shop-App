@@ -1,10 +1,11 @@
 'use server';
 
 import Reviews from "@/components/reviews/reviews";
-import { getImageUrl } from "@/data/images";
+import { imageUrl } from "@/data/images";
 import { getProduct } from "@/data/products";
 import Buttons from "./buttons";
 import Rating from "./rating";
+import Image from "next/image";
 
 async function Product ({params} : {params: {product:number}}) {
     const product = await getProduct(params.product);
@@ -13,11 +14,12 @@ async function Product ({params} : {params: {product:number}}) {
         <div>
             <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
             <div className="flex gap-7 mb-4">
-                <div className="w-80 h-60 flex items-center">
-                    <img 
-                        src={getImageUrl(product.image)} 
+                <div className="w-80 h-60 relative">
+                    <Image
+                        src={imageUrl(product.image)}
                         alt={product.name} 
-                        className="mx-auto max-h-60"
+                        className="object-contain"
+                        fill
                     />
                 </div>
                 <div>

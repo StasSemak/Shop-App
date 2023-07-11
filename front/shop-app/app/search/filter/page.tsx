@@ -1,9 +1,12 @@
+import { getCategories } from "@/data/categories"
 import SearchFilterPage from "./searchFilterPage"
 
-const SearchFilter = () => {
+const SearchFilter = async () => {
+    const categories = await getCategories();
+
     return(
         <div>
-            <SearchFilterPage/>
+            <SearchFilterPage fetchedCategories={categories}/>
         </div>
     )
 }

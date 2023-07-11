@@ -6,6 +6,8 @@ import CategoriesResult from "./categoriesResult";
 import ProductsResult from "./productsResult";
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from "next/link";
+import Button from "@/components/reusable/button";
+import Input from "@/components/reusable/input";
 
 const SearchPage = () => {
     const [searchInput, setSearchInput] = useState<string>('');
@@ -37,28 +39,22 @@ const SearchPage = () => {
     return (
         <div>
             <form onSubmit={submitHandler} className="flex gap-1">
-                <input 
+                <Input
                     type="text"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="searchInput"
                     value={searchInput}
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Search by product or category name"    
+                    placeholder="Search by product or category name"
                 />
-                <button type="submit"
-                    className="block w-10 h-10 bg-blue-600 rounded-md">
-                    <HeroIcon icon="MagnifyingGlassIcon" className="text-white mx-auto"/> 
-                </button>
+                <Button size="sm" icon="MagnifyingGlassIcon" type="submit"/>
             </form>
             <div className="mt-2 ml-1">
                 <Link href={`/search/filter` + (searchInput !== '' ? `?q=${searchInput}`: '')}>
                     <div className="flex items-center">
-                        <p className="text-blue-500">
+                        <p className="text-blue-600">
                             Extended products search
                         </p>
-                        <HeroIcon icon="ChevronRightIcon" className="text-blue-500 h-5 w-5"/>    
+                        <HeroIcon icon="ChevronRightIcon" className="text-blue-600 h-5 w-5"/>    
                     </div>
                 </Link>
             </div>
@@ -71,7 +67,7 @@ const SearchPage = () => {
                     :
                     <div className="h-72 flex items-center justify-center">
                         <p className="text-center text-2xl
-                            font-bold text-blue-500">Enter your request</p>
+                            font-bold text-blue-600">Enter your request</p>
                     </div>
                 }
             </div>

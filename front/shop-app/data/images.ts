@@ -1,3 +1,3 @@
-export const getImageUrl = (src:string) => {
-    return `https://localhost:7187/images/${src}`;
+export const imageUrl = (src:string) => {
+    return `http://shop-next-api.somee.com/images/${src}`;
 }

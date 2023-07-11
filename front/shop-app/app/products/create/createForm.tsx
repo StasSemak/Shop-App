@@ -1,19 +1,22 @@
 'use client';
 
-import HeroIcon from "@/components/icons/heroicon";
-import Button from "@/components/reusable/button";
-import Input from "@/components/reusable/input";
-import TextArea from "@/components/reusable/textarea";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { useFilePicker } from "use-file-picker";
+import { CategoryItem } from "@/data/categories";
+import axios from "axios";
+import Button from "@/components/reusable/button";
+import Input from "@/components/reusable/input";
+import TextArea from "@/components/reusable/textarea";
+import Select from "@/components/reusable/select";
 
-const CreateCategory = () => {
-    const [category, setCategory] = useState({
+const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
+    const [product, setProduct] = useState({
         name: '',
+        price: 0,
         description: '',
-        imagebase64: ''
+        imageBase64: '',
+        categoryId: 0
     });
     const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -26,8 +29,9 @@ const CreateCategory = () => {
 
     const onChangeHandler = async (e: 
         ChangeEvent<HTMLInputElement>|
-        ChangeEvent<HTMLTextAreaElement>) => {
-        setCategory({...category, [e.target.name]: e.target.value});
+        ChangeEvent<HTMLTextAreaElement>|
+        ChangeEvent<HTMLSelectElement>) => {
+        setProduct({...product, [e.target.name]: e.target.value});
     }
 
     const router = useRouter();
@@ -35,12 +39,20 @@ const CreateCategory = () => {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(category.name === '') {
+        if(product.name === '') {
             setErrorMessage('Name is required!');
             return;
         }
-        if(category.description === '') {
+        if(product.description === '') {
             setErrorMessage('Description is required!');
+            return;
+        }
+        if(product.price === 0) {
+            setErrorMessage('Price is required!');
+            return;
+        }
+        if(product.categoryId === 0) {
+            setErrorMessage('Category is required!');
             return;
         }
         if(filesContent.length === 0) {
@@ -48,18 +60,22 @@ const CreateCategory = () => {
             return;
         }
 
-        setCategory({...category, imagebase64: filesContent[0].content});
+        setProduct({...product, imageBase64: filesContent[0].content});
 
-        axios.post(`http://shop-next-api.somee.com/api/categories`, category)
+        axios.post(`http://shop-next-api.somee.com/api/products`, product)
             .then(() => {
-                alert(`Category ${category.name} created successfully!`);
+                alert(`Product ${product.name} created successfully!`);
                 router.back();
             })
             .catch(err => {
-                setErrorMessage("Error while creating category!");
+                setErrorMessage("Error while creating product!");
                 console.log(err);
             })
     }
+
+    const options = categories.map((cat, index) => (
+        <option key={index} value={cat.id}>{cat.name}</option>
+    ))
 
     return(
         <div>
@@ -71,15 +87,31 @@ const CreateCategory = () => {
                     type="text"
                     onChangeAction={onChangeHandler}
                     name="name"
-                    placeholder="Category name"   
+                    placeholder="Product name"
                 />
                 <TextArea
                     name="description"
                     onChangeAction={onChangeHandler}
-                    placeholder="Category description"
+                    placeholder="Product description" 
                 />
+                <div className="flex gap-2">
+                    <Input
+                        type="number"
+                        onChangeAction={onChangeHandler}
+                        name="price"
+                        placeholder="Product price" 
+                    />
+                    <Select
+                        name="categoryId"
+                        onChangeAction={onChangeHandler}
+                        defaultValue={0}
+                        defaultOption={{text: "Product category", disabled: true}}
+                    >
+                        {options}
+                    </Select>
+                </div>
                 <div className="mb-1">
-                    <p className="mb-1">Category image</p>
+                    <p className="mb-1">Product image</p>
                     {filesContent.length === 0 &&
                         <Button 
                             size="md" 
@@ -120,4 +152,4 @@ const CreateCategory = () => {
     )
 }
 
-export default CreateCategory
+export default CreateForm

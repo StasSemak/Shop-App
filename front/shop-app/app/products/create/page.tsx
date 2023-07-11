@@ -1,8 +1,11 @@
-const CreateProduct = () => {
+import { getCategories } from "@/data/categories";
+import CreateForm from "./createForm";
+
+const CreateProduct = async () => {
+    const categories = await getCategories();
+
     return(
-        <div>
-            <h1>Create product</h1>
-        </div>
+        <CreateForm categories={categories}/>
     )
 }
 

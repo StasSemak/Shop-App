@@ -1,6 +1,7 @@
 'use client';
 
-import HeroIcon from "@/components/icons/heroicon";
+import Button from "@/components/reusable/button";
+import Input from "@/components/reusable/input";
 import { RegisterItem } from "@/data/users";
 import axios from "axios";
 import Link from "next/link";
@@ -38,7 +39,7 @@ const RegisterForm = () => {
         if(filesContent.length !== 0) {
             setRegisterData({...registerData, imageBase64: filesContent[0].content});
         }
-        axios.post("https://localhost:7187/api/users/register", registerData)
+        axios.post("http://shop-next-api.somee.com/api/users/register", registerData)
             .then(res => {
                 router.push("/auth/register/success");
             })
@@ -54,55 +55,40 @@ const RegisterForm = () => {
                 <p className="mb-2 text-red-500">{errorMessage}</p>
             }
             <form onSubmit={submitHandler} className="flex flex-col gap-2 w-2/3 max-w-[680px]">
-                <input 
+                <Input
                     type="text"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="userName"
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Username"    
+                    placeholder="Username"   
                 />
-                <input 
+                <Input
                     type="text"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="email"
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Email"    
+                    placeholder="Email" 
                 />
-                <input 
+                <Input
                     type="password"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="password"
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Password"    
+                    placeholder="Password"
                 />
-                <input 
+                <Input
                     type="password"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="confirmPassword"
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Confirm password"    
+                    placeholder="Confirm password"
                 />
                 <div className="mb-1">
                     <p className="mb-1">Profile image (not required)</p>
                     {filesContent.length === 0 &&
-                        <button 
+                        <Button 
+                            size="md" 
                             type="button" 
-                            className="block h-10 w-32 bg-blue-600 rounded-md"
-                            onClick={() => openFileSelector()}
-                        >
-                            <div className="flex gap-1 justify-center">
-                                <p className="text-white">Select</p>
-                                <HeroIcon icon="FolderOpenIcon" className="text-white"/>
-                            </div>
-                        </button>
+                            text="Select"
+                            icon="FolderOpenIcon"
+                            onClickAction={openFileSelector}
+                        />
                     }   
                     <div>
                         {loading && <p>Loading...</p>}
@@ -115,23 +101,26 @@ const RegisterForm = () => {
                         {filesContent.map((file, index) => (
                             <div key={index} className="flex items-center gap-3">
                                 <img src={file.content} alt={file.name} className="h-36"/>
-                                <button className="block h-10 w-10 bg-blue-600 rounded-md"
-                                    onClick={() => clear()}>
-                                    <HeroIcon icon="TrashIcon" className="text-white mx-auto"/>
-                                </button>
+                                <Button
+                                    size="sm"
+                                    type="button"
+                                    onClickAction={clear}
+                                    icon="TrashIcon"
+                                />
                             </div>
                         ))}
                     </div>
                 </div>
-                <button type="submit"
-                    className="block h-10 bg-blue-600 rounded-md">
-                        <p className="text-white mx-auto">Register</p>
-                </button>
+                <Button
+                    size="lg"
+                    type="submit"
+                    text="Register"
+                />
             </form>
             <div className="flex gap-1 mt-2">
                 <p>Already have an account?</p>
                 <Link href="/auth/login">
-                    <p className="text-blue-500">Login</p>
+                    <p className="text-blue-600">Login</p>
                 </Link>
             </div>
         </div>

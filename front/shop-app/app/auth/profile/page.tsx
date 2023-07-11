@@ -1,12 +1,12 @@
 'use client';
 
 import HeroIcon from "@/components/icons/heroicon";
-import { getImageUrl } from "@/data/images";
+import { imageUrl } from "@/data/images";
 import { UserItem, getLoggedUser, isUserLogged } from "@/data/users";
-import { useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image"
 
 const Profile = () => {
     const [user, setUser] = useState<UserItem>({
@@ -27,24 +27,32 @@ const Profile = () => {
 
     return(
         <div>
-            <div className="flex gap-4">
-                <img
-                    src={getImageUrl(user.image)}
+            <div className="flex gap-4 mb-3">
+                <Image
+                    src={imageUrl(user.image)}
                     alt={user.userName}
-                    className="h-36 w-36 rounded-sm"
+                    className="rounded-sm"
+                    width={144}
+                    height={144}
                 />
                 <div>
-                    <p className="text-2xl text-blue-500 font-semibold mb-1">{user.userName}</p>
+                    <p className="text-2xl text-blue-600 font-semibold mb-1">{user.userName}</p>
                     <p className="text-sm mb-2">{user.role}</p>
                     <p className="mb-4">{user.email}</p>
                     <Link href='/auth/logout'>
                         <div className="flex items-center">
-                            <p className="text-blue-500">Log out</p>
-                            <HeroIcon icon="ArrowRightOnRectangleIcon" className="text-blue-500"/>
+                            <p className="text-blue-600">Log out</p>
+                            <HeroIcon icon="ArrowRightOnRectangleIcon" className="text-blue-600"/>
                         </div>
                     </Link>
                 </div>
             </div>
+            <Link href='/auth/profile/adminpanel'>
+                <div className="flex items-center">
+                    <p className="text-blue-600">Admin panel</p>
+                    <HeroIcon icon="Cog6ToothIcon" className="text-blue-600"/>
+                </div>
+            </Link>
         </div>
     )
 }

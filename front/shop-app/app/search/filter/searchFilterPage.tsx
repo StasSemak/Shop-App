@@ -5,11 +5,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import ProductsResult from "../productsResult";
 import { CategoryItem } from "@/data/categories";
-import axios from "axios";
 import { ProductSearchInput } from "@/data/products";
 import Link from "next/link";
+import Button from "@/components/reusable/button";
+import Input from "@/components/reusable/input";
+import Select from "@/components/reusable/select";
 
-const SearchFilterPage = () => {
+const SearchFilterPage = ({fetchedCategories}:{fetchedCategories:CategoryItem[]}) => {
     const [searchInput, setSearchInput] = useState<ProductSearchInput>({
         name: '',
         categoryId: 0,
@@ -48,13 +50,7 @@ const SearchFilterPage = () => {
     }, [query, catId, maxP, minP, setCategories, setDisplayResults])
 
     useEffect(() => {
-        axios.get<CategoryItem[]>('https://localhost:7187/api/categories')
-            .then(res => {
-                setCategories(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        setCategories(fetchedCategories);
     }, [setCategories])
 
     const onChangeHandler = async (e: 
@@ -84,66 +80,52 @@ const SearchFilterPage = () => {
             <div className="mb-2">
                 <Link href={`/search` + (searchInput.name !== '' ? `?q=${searchInput.name}` : '')}>
                     <div className="flex items-center">
-                        <HeroIcon icon="ChevronLeftIcon" className="text-blue-500 h-5 w-5"/> 
-                        <p className="text-blue-500">Back to simple search</p>
+                        <HeroIcon icon="ChevronLeftIcon" className="text-blue-600 h-5 w-5"/> 
+                        <p className="text-blue-600">Back to simple search</p>
                     </div>
                 </Link>
             </div>
             <form onSubmit={submitHandler} className="flex flex-col gap-3">
-                <input 
+                <Input
                     type="text"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="name"
                     value={searchInput.name}
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Product name"    
+                    placeholder="Product name"
                 />
-
-                <select 
+                <Select
                     name="categoryId"
-                    value={searchInput.categoryId}
-                    onChange={onChangeHandler}
-                    className="block w-full rounded-md border-0 py-2 px-2.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
+                    defaultValue={searchInput.categoryId}
+                    onChangeAction={onChangeHandler}
+                    defaultOption={{text: "All categories"}}
                 >
-                    <option value={0}>All categories</option>
                     {options}
-                </select>
-
+                </Select>
                 <div className="flex justify-between">
                     <div className="flex gap-2 items-center ml-1">
                         <p>Price:</p>
-                        <input 
-                            type="number" 
+                        <Input
+                            type="number"
+                            onChangeAction={onChangeHandler}
                             name="minPrice"
                             value={searchInput.minPrice}
-                            onChange={onChangeHandler}
-                            className="block w-24 rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                            ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                            focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
+                            className="w-24"
                         />
                         <p>to</p>
-                        <input 
-                            type="number" 
+                        <Input
+                            type="number"
+                            onChangeAction={onChangeHandler}
                             name="maxPrice"
                             value={searchInput.maxPrice}
-                            onChange={onChangeHandler}
-                            className="block w-24 rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                            ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                            focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
+                            className="w-24"
                         />
                     </div>
-
-                    <button type="submit"
-                        className="block h-10 w-28 bg-blue-600 rounded-md ml-1">
-                        <div className="flex items-center gap-1 justify-center">
-                            <p className="text-white">Search</p>
-                            <HeroIcon icon="MagnifyingGlassIcon" className="text-white h-5 w-5"/> 
-                        </div>
-                    </button>
+                    <Button 
+                        size="md" 
+                        type="submit" 
+                        icon="MagnifyingGlassIcon"
+                        text="Search"
+                    />
                 </div>
             </form>
             <div className="mt-5">
@@ -152,7 +134,7 @@ const SearchFilterPage = () => {
                     :
                     <div className="h-72 flex items-center justify-center">
                         <p className="text-center text-2xl
-                            font-bold text-blue-500">Enter your request</p>
+                            font-bold text-blue-600">Enter your request</p>
                     </div>
                 }
             </div>

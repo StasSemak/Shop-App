@@ -1,10 +1,9 @@
-'use server'
-
 import ProductCard from "@/components/products/productCard";
 import { getCategory } from "@/data/categories";
-import { getImageUrl } from "@/data/images";
+import { imageUrl } from "@/data/images";
 import { getProducts } from "@/data/products";
 import Link from "next/link";
+import Image from "next/image"
 
 async function Category ({params} : {params: {category:number}}) {
     const category = await getCategory(params.category);
@@ -14,15 +13,17 @@ async function Category ({params} : {params: {category:number}}) {
         <div>
             <div className="flex gap-4 mb-4">
                 <div className="h-32 w-52">
-                    <img 
-                        src={getImageUrl(category.image)} 
+                    <Image
+                        src={imageUrl(category.image)}
                         alt={category.name}
                         className="h-full w-full object-cover object-center"
+                        width={208}
+                        height={128}
                     />
                 </div>
                 <div>
                     <h1 className="text-4xl mb-2 font-semibold">{category.name}</h1>
-                    <p className="text-gray-500">{category.description}</p>
+                    <p className="text-blue-600">{category.description}</p>
                 </div>
             </div>
             <div className="flex flex-row gap-2 flex-wrap">

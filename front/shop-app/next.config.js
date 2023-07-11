@@ -18,7 +18,6 @@ const nextConfig = {
     },
     experimental: {
         serverActions: true,
-        enableUndici: true
     },
 }
 

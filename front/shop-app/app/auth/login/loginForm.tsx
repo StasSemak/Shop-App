@@ -1,8 +1,8 @@
 'use client';
 
+import Button from "@/components/reusable/button";
+import Input from "@/components/reusable/input";
 import { LoginItem, UserItem, logIn } from "@/data/users";
-import { login } from "@/redux/features/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ const LoginForm = () => {
         email: '',
         password: ''
     });    
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
        setLoginData({...loginData, [e.target.name]: e.target.value});
@@ -23,46 +24,45 @@ const LoginForm = () => {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        axios.post<UserItem>("https://localhost:7187/api/users/login", loginData)
+        axios.post<UserItem>("http://shop-next-api.somee.com/api/users/login", loginData)
             .then(res => {
                 logIn(res.data);
                 router.push("/auth/profile");
             })
             .catch(err => {
                 console.log(err);
+                setErrorMessage(err.response.data.error);
             })
     }
 
     return(
         <div className="flex flex-col items-center mt-5">
+            {errorMessage != '' &&
+                <p className="mb-2 text-red-500">{errorMessage}</p>
+            }
             <form onSubmit={submitHandler} className="flex flex-col gap-2 w-2/3 max-w-[680px]">
-                <input 
+                <Input
                     type="text"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="email"
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Email"    
+                    placeholder="Email" 
                 />
-                <input 
+                <Input
                     type="password"
-                    onChange={onChangeHandler}
+                    onChangeAction={onChangeHandler}
                     name="password"
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
-                    placeholder="Password"    
+                    placeholder="Password"
                 />
-                <button type="submit"
-                    className="block h-10 bg-blue-600 rounded-md">
-                    <p className="text-white mx-auto">Login</p>
-                </button>
+                <Button
+                    size="lg"
+                    type="submit"
+                    text="Login"
+                />
             </form>
             <div className="flex gap-1 mt-2">
                 <p>Don't have an account?</p>
                 <Link href="/auth/register">
-                    <p className="text-blue-500">Register</p>
+                    <p className="text-blue-600">Register</p>
                 </Link>
             </div>
         </div>

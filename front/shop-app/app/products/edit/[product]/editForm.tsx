@@ -1,35 +1,39 @@
 'use client';
 
-import { CategoryItem, getCategory } from "@/data/categories";
-import axios from "axios";
+import HeroIcon from "@/components/icons/heroicon";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
-import useSWR, { Fetcher } from "swr";
 import { useFilePicker } from "use-file-picker";
+import { CategoryItem } from "@/data/categories";
+import axios from "axios";
+import { ProductItem } from "@/data/products";
 import Image from "next/image"
 import { imageUrl } from "@/data/images";
-import { useRouter } from "next/navigation";
 import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
+import Select from "@/components/reusable/select";
 
-const EditCategory = ({params}:{params:{category:number}}) => {
-    const [category, setCategory] = useState<CategoryItem>({
+const EditForm = ({categories, fetchedProduct, catId}:
+    {categories:CategoryItem[], fetchedProduct:ProductItem, catId:number}) => {
+    const [product, setProduct] = useState<ProductItem>({
         id: 0,
         name: '',
         description: '',
-        image: ''
-    })
-    const [isNewImage, setIsNewImage] = useState<boolean>(false);
+        price: 0,
+        image: '',
+        category: '',
+        rating: 0
+    });
+
     const [errorMessage, setErrorMessage] = useState<string>('');
-
-    const categoryFetcher: Fetcher<CategoryItem, string> = (input) => getCategory(parseInt(input));
-
-    const { data, error } = useSWR(params.category.toString(), categoryFetcher);
+    const [isNewImage, setIsNewImage] = useState<boolean>(false);
+    const [categoryId, setCategoryId] = useState<number>(0);
 
     useEffect(() => {
-        if(data) setCategory(data);
-        if(error) console.log(error);
-    }, [data, error, setCategory]);
+        setProduct(fetchedProduct);
+        setCategoryId(catId);
+    }, [setProduct, setCategoryId])
 
     const [openFileSelector, { filesContent, loading, errors, clear }] = useFilePicker({
         readAs: 'DataURL',
@@ -41,7 +45,10 @@ const EditCategory = ({params}:{params:{category:number}}) => {
     const onChangeHandler = async (e: 
         ChangeEvent<HTMLInputElement>|
         ChangeEvent<HTMLTextAreaElement>) => {
-        setCategory({...category, [e.target.name]: e.target.value});
+        setProduct({...product, [e.target.name]: e.target.value});
+    }
+    const onSelectChangeHandler = async (e: ChangeEvent<HTMLSelectElement>) => {
+        setCategoryId(parseInt(e.target.value));
     }
 
     const router = useRouter();
@@ -49,12 +56,16 @@ const EditCategory = ({params}:{params:{category:number}}) => {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(category.name === '') {
+        if(product.name === '') {
             setErrorMessage('Name is required!');
             return;
         }
-        if(category.description === '') {
+        if(product.description === '') {
             setErrorMessage('Description is required!');
+            return;
+        }
+        if(product.price === 0) {
+            setErrorMessage('Price is required!');
             return;
         }
         if(isNewImage && filesContent.length === 0) {
@@ -62,14 +73,16 @@ const EditCategory = ({params}:{params:{category:number}}) => {
             return;
         }
 
-        axios.put("http://shop-next-api.somee.com/api/categories", {
-            id: category.id,
-            name: category.name,
-            description: category.description,
+        axios.put(`http://shop-next-api.somee.com/api/products`,{
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            categoryId: categoryId,
             imageBase64: (isNewImage ? filesContent[0].content : '')
         })
         .then(() => {
-            alert(`Category ${category.name} updated successfully!`);
+            alert(`Product ${product.name} updated successfully!`);
             router.back();
         })
         .catch(err => {
@@ -77,7 +90,11 @@ const EditCategory = ({params}:{params:{category:number}}) => {
         })
     }
 
-    return(
+    const options = categories.map((cat, index) => (
+        <option key={index} value={cat.id}>{cat.name}</option>
+    ))
+
+    return (
         <div>
             {errorMessage != '' &&
                 <p className="mb-2 mx-auto text-red-500">{errorMessage}</p>
@@ -87,23 +104,39 @@ const EditCategory = ({params}:{params:{category:number}}) => {
                     type="text"
                     onChangeAction={onChangeHandler}
                     name="name"
-                    value={category.name}
-                    placeholder="Category name"  
+                    value={product.name}
+                    placeholder="Product name"
                 />
                 <TextArea
                     name="description"
-                    value={category.description}
                     onChangeAction={onChangeHandler}
-                    placeholder="Category description" 
+                    value={product.description}
+                    placeholder="Product description"
                 />
+                <div className="flex gap-2">
+                    <Input
+                        type="number"
+                        onChangeAction={onChangeHandler}
+                        name="price"
+                        value={product.price}
+                        placeholder="Product price"
+                    />
+                    <Select
+                        name="categoryId"
+                        onChangeAction={onSelectChangeHandler}
+                        defaultValue={categoryId}
+                    >
+                        {options}
+                    </Select>
+                </div>
                 <div className="mb-1">
-                    <p className="mb-1">Category image</p>
+                    <p className="mb-1">Product image</p>
                     {isNewImage === false ?
                         <div className="flex items-center gap-3">
                             <div className="h-36 w-52 relative mb-1">
                                 <Image
-                                    src={imageUrl(category.image)}
-                                    alt={category.name}
+                                    src={imageUrl(product.image)}
+                                    alt={product.name}
                                     fill
                                     className="object-contain rounded-md"
                                 />
@@ -159,4 +192,4 @@ const EditCategory = ({params}:{params:{category:number}}) => {
     )
 }
 
-export default EditCategory
+export default EditForm

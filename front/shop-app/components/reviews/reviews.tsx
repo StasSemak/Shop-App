@@ -1,16 +1,7 @@
 'use server';
 
-import { ReviewItem, getReviewsByProduct } from "@/data/reviews";
+import { getReviewsByProduct } from "@/data/reviews";
 import ReviewCard from "./reviewCard";
-
-const testReview: ReviewItem = {
-    id: 0,
-    text: "very very so very large review text. product is good, liked it sooo much. recommend to aquire it for everyone who has any doubts",
-    mark: 3,
-    date: "18.06.2023",
-    username: "iampaidforreviews",
-    userId: 0
-}
 
 async function Reviews({productId}:{productId:number}) {
     const reviews = await getReviewsByProduct(productId);
