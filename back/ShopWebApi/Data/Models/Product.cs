@@ -21,5 +21,7 @@ namespace Data.Models
         public Category Category { get; set; }
 
         public ICollection<Review> Reviews { get; set; }
+        public ICollection<Basket> Baskets { get; set; }
+        public ICollection<BasketProduct> BasketProducts { get; set; }
     }
 }

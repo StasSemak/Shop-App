@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -85,7 +86,16 @@ namespace Data.Data
                                     .HasDefaultValue(DateTime.UtcNow);
             builder.Entity<Review>().Property(x => x.IsDelete)
                                     .HasDefaultValue(false);
-                                    
+
+            builder.Entity<User>().HasOne(x => x.Basket)
+                                  .WithOne(x => x.User)
+                                  .HasForeignKey<Basket>(x => x.UserId)
+                                  .IsRequired();
+
+            builder.Entity<Basket>().HasMany(x => x.Products)
+                                    .WithMany(x => x.Baskets)
+                                    .UsingEntity<BasketProduct>(
+                x => x.Property(x => x.Count).HasDefaultValue(1));
 
             builder.Entity<Category>().HasData(MockData.GetCategories());
             builder.Entity<Product>().HasData(MockData.GetProducts());
@@ -95,5 +105,7 @@ namespace Data.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketProduct> BasketProducts { get; set; }
     }
 }

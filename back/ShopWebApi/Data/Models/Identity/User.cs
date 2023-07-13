@@ -12,5 +12,6 @@ namespace Data.Models.Identity
         public string Image { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<Review> Reviews { get; set; }
+        public Basket? Basket { get; set; }
     }
 }

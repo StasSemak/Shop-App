@@ -4,6 +4,7 @@ using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230712142848_AddBasket")]
+    partial class AddBasket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,20 +46,13 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Models.BasketProduct", b =>
                 {
-                    b.Property<int>("BasketId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
 
-                    b.HasKey("BasketId", "ProductId");
-
-                    b.HasIndex("ProductId");
+                    b.HasKey("ProductId", "BasketId");
 
                     b.ToTable("BasketProducts");
                 });
@@ -72,7 +68,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 13, 14, 8, 25, 236, DateTimeKind.Utc).AddTicks(2592));
+                        .HasDefaultValue(new DateTime(2023, 7, 12, 14, 28, 47, 704, DateTimeKind.Utc).AddTicks(3603));
 
                     b.Property<string>("Description")
                         .HasMaxLength(4080)
@@ -298,7 +294,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 13, 14, 8, 25, 236, DateTimeKind.Utc).AddTicks(6004));
+                        .HasDefaultValue(new DateTime(2023, 7, 12, 14, 28, 47, 704, DateTimeKind.Utc).AddTicks(6617));
 
                     b.Property<string>("Description")
                         .HasMaxLength(4080)
@@ -491,7 +487,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 13, 14, 8, 25, 243, DateTimeKind.Utc).AddTicks(8574));
+                        .HasDefaultValue(new DateTime(2023, 7, 12, 14, 28, 47, 709, DateTimeKind.Utc).AddTicks(6890));
 
                     b.Property<bool>("IsDelete")
                         .ValueGeneratedOnAdd()
@@ -623,17 +619,21 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Models.BasketProduct", b =>
                 {
-                    b.HasOne("Data.Models.Basket", null)
-                        .WithMany("BasketProducts")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Models.Product", null)
+                    b.HasOne("Data.Models.Basket", "Basket")
                         .WithMany("BasketProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Data.Models.Product", "Product")
+                        .WithMany("BasketProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Data.Models.Identity.UserRole", b =>

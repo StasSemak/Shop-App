@@ -25,14 +25,16 @@ namespace BussinessLogic.Services
         private readonly IMapper mapper;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly IBasketService basketService;
 
         public UserService(ShopDbContext context, IMapper mapper, UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager, IBasketService basketService)
         {
             this.context = context;
             this.mapper = mapper;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.basketService = basketService;
         }
 
         public async Task<UserItemDto> GetUserAsync(int id)
@@ -81,6 +83,10 @@ namespace BussinessLogic.Services
                 throw new Exception(exMessage);
             }
             result = await userManager.AddToRoleAsync(user, model.Role);
+            if(result.Succeeded)
+            {
+                await basketService.Create(user.Id);
+            }
         }
 
         private bool CheckUserEmail(string email)
