@@ -5,8 +5,8 @@ import Image from "next/image"
 
 const CategoryCard = ({name, imagePath} : {name:string, imagePath:string}) => {
     return(
-        <div className="flex flex-col items-center w-64 border-2 rounded-xl pb-1 
-            bg-white border-gray-200 hover:bg-gray-200 hover:scale-105 transition-all">
+        <div className="flex flex-col items-center w-64 rounded-xl pb-1 
+            hover:scale-105 transition-all">
             <div className="w-full h-40 relative">
                 <Image
                     src={imageUrl(imagePath)}

@@ -25,7 +25,7 @@ const CategoryListItem = ({category}:{category:CategoryItem}) => {
 
     return(
         <div className="grid gap-2 items-center grid-cols-12
-            border-y-2 border-blue-600 py-1 px-1">
+            border rounded-md border-blue-600 p-2">
             <div className="flex justify-center">
                 <p>{category.id}.</p>
             </div>

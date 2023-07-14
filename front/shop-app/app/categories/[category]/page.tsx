@@ -16,7 +16,7 @@ async function Category ({params} : {params: {category:number}}) {
                     <Image
                         src={imageUrl(category.image)}
                         alt={category.name}
-                        className="h-full w-full object-cover object-center"
+                        className="h-full w-full object-cover object-center rounded-sm"
                         width={208}
                         height={128}
                     />

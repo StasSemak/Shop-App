@@ -25,7 +25,7 @@ const ProductListItem = ({product}:{product:ProductItem}) => {
 
     return(
         <div className="grid gap-2 items-center grid-cols-12
-            border-y-2 border-blue-600 py-1 px-1">
+            border rounded-md border-blue-600 p-2">
             <p className="text-center">{product.id}.</p>
             <p className="text-center col-span-2">{product.name}</p>
             <div className="h-20 w-32 relative col-span-3">
@@ -40,7 +40,7 @@ const ProductListItem = ({product}:{product:ProductItem}) => {
             <p className="text-center col-span-2">{product.price}&#8372;</p>
             <div className="flex items-center justify-center col-span-2">
                 <p>{product.rating}</p>
-                <HeroIcon icon="StarIcon"/>
+                <HeroIcon icon="Star"/>
             </div>
             <div className="flex gap-2 col-span-2 justify-center">
                 <Link href={`/products/${product.id}`}>

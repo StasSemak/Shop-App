@@ -6,8 +6,8 @@ import Image from "next/image"
 
 function ProductCard ({product} : {product:ProductItem}) {
     return(
-        <div className="flex flex-col gap-1 border-gray-200 border-2 w-56 h-64 p-2
-            hover:scale-105 transition-all">
+        <div className="flex flex-col gap-1 border-blue-600 border w-56 h-64 p-2
+            hover:scale-105 transition-all rounded-md">
             <div className="h-40 relative">
                 <Image
                     src={imageUrl(product.image)}
