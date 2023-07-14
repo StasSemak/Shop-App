@@ -18,10 +18,10 @@ const Rating = ({rating}:{rating:number}) => {
     return(
         <div className="flex mb-3">
                 {[...Array(solidCount)].map((e, i) => (
-                    <HeroIcon key={i} icon="StarIcon" solid className="text-amber-400"/>
+                    <HeroIcon key={i} icon="Star" solid className="text-amber-400"/>
                 ))}
                 {[...Array(outlineCount)].map((e, i) => (
-                    <HeroIcon key={i} icon="StarIcon" className="text-amber-400"/>
+                    <HeroIcon key={i} icon="Star" className="text-amber-400"/>
                 ))}
         </div>
     )

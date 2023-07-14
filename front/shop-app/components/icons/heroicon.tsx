@@ -16,7 +16,7 @@ const HeroIcon = (props: Props): JSX.Element => {
   const { ...icons } = solid ? SolidIcons : OutlineIcons;
 
   // @ts-ignore
-  const Icon: JSX.Element = icons[icon];
+  const Icon: JSX.Element = icons[icon+"Icon"];
 
   const classes = twMerge('h-6 w-6 text-black', className);
 

@@ -37,3 +37,8 @@ export function logOut() {
 export function getLoggedUser() {
     return JSON.parse(localStorage.loggedUser) as UserItem;
 }
+
+export function getLoggedUserId() {
+    const user: UserItem = JSON.parse(localStorage.loggedUser) as UserItem;
+    return user.id;
+}

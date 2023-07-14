@@ -80,7 +80,7 @@ const SearchFilterPage = ({fetchedCategories}:{fetchedCategories:CategoryItem[]}
             <div className="mb-2">
                 <Link href={`/search` + (searchInput.name !== '' ? `?q=${searchInput.name}` : '')}>
                     <div className="flex items-center">
-                        <HeroIcon icon="ChevronLeftIcon" className="text-blue-600 h-5 w-5"/> 
+                        <HeroIcon icon="ChevronLeft" className="text-blue-600 h-5 w-5"/> 
                         <p className="text-blue-600">Back to simple search</p>
                     </div>
                 </Link>
@@ -123,7 +123,7 @@ const SearchFilterPage = ({fetchedCategories}:{fetchedCategories:CategoryItem[]}
                     <Button 
                         size="md" 
                         type="submit" 
-                        icon="MagnifyingGlassIcon"
+                        icon="MagnifyingGlass"
                         text="Search"
                     />
                 </div>

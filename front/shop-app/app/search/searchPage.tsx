@@ -46,7 +46,7 @@ const SearchPage = () => {
                     value={searchInput}
                     placeholder="Search by product or category name"
                 />
-                <Button size="sm" icon="MagnifyingGlassIcon" type="submit"/>
+                <Button size="sm" icon="MagnifyingGlass" type="submit"/>
             </form>
             <div className="mt-2 ml-1">
                 <Link href={`/search/filter` + (searchInput !== '' ? `?q=${searchInput}`: '')}>
@@ -54,7 +54,7 @@ const SearchPage = () => {
                         <p className="text-blue-600">
                             Extended products search
                         </p>
-                        <HeroIcon icon="ChevronRightIcon" className="text-blue-600 h-5 w-5"/>    
+                        <HeroIcon icon="ChevronRight" className="text-blue-600 h-5 w-5"/>    
                     </div>
                 </Link>
             </div>

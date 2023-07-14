@@ -1,6 +1,5 @@
 'use client';
 
-import HeroIcon from "@/components/icons/heroicon";
 import Button from "@/components/reusable/button";
 import { logOut } from "@/data/users";
 import { useRouter } from "next/navigation";
@@ -19,7 +18,7 @@ const Logout = () => {
             <Button
                 size="md"
                 text="Log out"
-                icon="ArrowRightOnRectangleIcon"
+                icon="ArrowRightOnRectangle"
                 onClickAction={clickHandler}
             />
         </div>

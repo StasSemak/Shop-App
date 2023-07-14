@@ -1,14 +1,19 @@
 'use client';
 
-import HeroIcon from "@/components/icons/heroicon";
 import Button from "@/components/reusable/button";
+import { getLoggedUserId } from "@/data/users";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const Buttons = ({id}:{id:number}) => {
     const router = useRouter();
 
     const cartClickHandler = () => {
-        //adding to cart
+        const userId = getLoggedUserId();
+        axios.post(`http://shop-next-api.somee.com/api/baskets`,{
+            userId: userId,
+            productId: id
+        }).catch(err => console.log(err));
     }
 
     const reviewClickHandler = () => {
@@ -20,14 +25,14 @@ const Buttons = ({id}:{id:number}) => {
             <Button
                 size="md"
                 text="Add to cart"
-                icon="ShoppingCartIcon"
+                icon="ShoppingCart"
                 className="w-36"
                 onClickAction={cartClickHandler}
             />
             <Button
                 size="md"
                 text="Add review"
-                icon="StarIcon"
+                icon="Star"
                 className="w-36"
                 onClickAction={reviewClickHandler}
             />

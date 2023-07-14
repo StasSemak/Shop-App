@@ -117,7 +117,7 @@ const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
                             size="md" 
                             type="button" 
                             text="Select"
-                            icon="FolderOpenIcon"
+                            icon="FolderOpen"
                             onClickAction={openFileSelector}
                         />
                     }   
@@ -136,7 +136,7 @@ const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
                                     size="sm"
                                     type="button"
                                     onClickAction={clear}
-                                    icon="TrashIcon"
+                                    icon="Trash"
                                 />
                             </div>
                         ))}

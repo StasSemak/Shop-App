@@ -112,7 +112,7 @@ const EditCategory = ({params}:{params:{category:number}}) => {
                             <Button
                                 size="sm"
                                 type="button"
-                                icon="TrashIcon"
+                                icon="Trash"
                                 onClickAction={() => setIsNewImage(true)}
                             />
                         </div>
@@ -123,7 +123,7 @@ const EditCategory = ({params}:{params:{category:number}}) => {
                                     size="md" 
                                     type="button" 
                                     text="Select"
-                                    icon="FolderOpenIcon"
+                                    icon="FolderOpen"
                                     onClickAction={openFileSelector}
                                 />
                             }   

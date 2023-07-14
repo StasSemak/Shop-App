@@ -4,7 +4,7 @@ import Link from "next/link";
 const Registered = () => {
     return(
         <div className="flex flex-col items-center mt-5 gap-1">
-            <HeroIcon icon="CheckCircleIcon" className="text-blue-600 h-12 w-12"/>
+            <HeroIcon icon="CheckCircle" className="text-blue-600 h-12 w-12"/>
             <p className="text-center text-2xl font-bold text-blue-600">
                 Registered successfully
             </p>

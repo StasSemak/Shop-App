@@ -13,18 +13,12 @@ interface Props {
 }
 
 const Button = (props: Props) => {
-    // let widthClass = "w-";
-    // if(props.size === 'sm') widthClass += '10';
-    // else if(props.size === 'md') widthClass += '32';
-    // else if(props.size === 'lg') widthClass += 'full';
-
     const baseClasses = "block h-10 bg-blue-600 rounded-md " + 
         "border-2 border-blue-600 hover:bg-white " +
         "group transition-all";
 
-
-    const classes = twMerge(baseClasses, "w-"+(props.size==="sm" ? "10" : 
-        (props.size==="md" ? "32" : "full")) ,props.className);
+    const classes = twMerge("w-"+(props.size==="sm" ? "10" : 
+        (props.size==="md" ? "32" : "full")), baseClasses, props.className);
 
     return(
         <button

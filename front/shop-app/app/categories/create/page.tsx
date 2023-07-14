@@ -85,7 +85,7 @@ const CreateCategory = () => {
                             size="md" 
                             type="button" 
                             text="Select"
-                            icon="FolderOpenIcon"
+                            icon="FolderOpen"
                             onClickAction={openFileSelector}
                         />
                     }   
@@ -104,7 +104,7 @@ const CreateCategory = () => {
                                     size="sm"
                                     type="button"
                                     onClickAction={clear}
-                                    icon="TrashIcon"
+                                    icon="Trash"
                                 />
                             </div>
                         ))}

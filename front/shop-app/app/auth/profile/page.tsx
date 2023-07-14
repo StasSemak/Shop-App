@@ -42,7 +42,7 @@ const Profile = () => {
                     <Link href='/auth/logout'>
                         <div className="flex items-center">
                             <p className="text-blue-600">Log out</p>
-                            <HeroIcon icon="ArrowRightOnRectangleIcon" className="text-blue-600"/>
+                            <HeroIcon icon="ArrowRightOnRectangle" className="text-blue-600"/>
                         </div>
                     </Link>
                 </div>
@@ -50,7 +50,7 @@ const Profile = () => {
             <Link href='/auth/profile/adminpanel'>
                 <div className="flex items-center">
                     <p className="text-blue-600">Admin panel</p>
-                    <HeroIcon icon="Cog6ToothIcon" className="text-blue-600"/>
+                    <HeroIcon icon="Cog6Tooth" className="text-blue-600"/>
                 </div>
             </Link>
         </div>

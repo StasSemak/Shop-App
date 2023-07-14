@@ -46,13 +46,13 @@ const CategoryListItem = ({category}:{category:CategoryItem}) => {
             </p>
             <div className="flex gap-2 col-span-2 justify-center">
                 <Link href={`/categories/${category.id}`}>
-                    <HeroIcon icon="ArrowTopRightOnSquareIcon" className="text-blue-600"/>
+                    <HeroIcon icon="ArrowTopRightOnSquare" className="text-blue-600"/>
                 </Link>
                 <Link href={`/categories/edit/${category.id}`}>
-                    <HeroIcon icon="PencilSquareIcon" className="text-blue-600"/>
+                    <HeroIcon icon="PencilSquare" className="text-blue-600"/>
                 </Link>
                 <button onClick={deleteHandler}>
-                    <HeroIcon icon="TrashIcon" className="text-blue-600"/>
+                    <HeroIcon icon="Trash" className="text-blue-600"/>
                 </button>
             </div>
         </div>
