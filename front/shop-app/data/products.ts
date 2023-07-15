@@ -1,13 +1,13 @@
 export async function getProducts(id:number) {
     const res = await fetch(`http://shop-next-api.somee.com/api/products/category/${id}`);
     const products = await res.json();
-    return Object.values(products) as ProductItem[];
+    return products as ProductItem[];
 }
 
 export async function getAllProducts() {
     const res = await fetch(`http://shop-next-api.somee.com/api/products`);
     const products = await res.json();
-    return Object.values(products) as ProductItem[]; 
+    return products as ProductItem[]; 
 }
 
 export async function getProduct(id:number) {
@@ -27,7 +27,7 @@ export async function getProductBySearchInput(input: ProductSearchInput) {
         }
     );
     const products = await res.json();
-    return Object.values(products) as ProductItem[];
+    return products as ProductItem[];
 }
 
 export interface ProductItem {

@@ -1,7 +1,7 @@
 export async function getCategories() {
     const res = await fetch(`http://shop-next-api.somee.com/api/categories`);
     const categories = await res.json();
-    return Object.values(categories) as CategoryItem[];
+    return categories as CategoryItem[];
 }
 
 export async function getCategory(id: number) {
@@ -21,13 +21,13 @@ export async function getCategoryBySearchInput(input: string) {
         }
     );
     const categories = await res.json();
-    return Object.values(categories) as CategoryItem[];
+    return categories as CategoryItem[];
 }
 
 export async function getCategoryIdByName(name: string) {
     const res = await fetch(`http://shop-next-api.somee.com/api/categories/id/${name}`);
-    const id = res.json();
-    return id as unknown as number;
+    const id = await res.json();
+    return id as number;
 }
 
 export interface CategoryItem {

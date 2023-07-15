@@ -39,6 +39,6 @@ export function getLoggedUser() {
 }
 
 export function getLoggedUserId() {
-    const user: UserItem = JSON.parse(localStorage.loggedUser) as UserItem;
+    const user: UserItem = getLoggedUser();
     return user.id;
 }
