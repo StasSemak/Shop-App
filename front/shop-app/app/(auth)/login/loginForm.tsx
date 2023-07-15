@@ -27,7 +27,7 @@ const LoginForm = () => {
         axios.post<UserItem>("http://shop-next-api.somee.com/api/users/login", loginData)
             .then(res => {
                 logIn(res.data);
-                router.push("/auth/profile");
+                router.push("/profile");
             })
             .catch(err => {
                 console.log(err);
@@ -61,7 +61,7 @@ const LoginForm = () => {
             </form>
             <div className="flex gap-1 mt-2">
                 <p>Don't have an account?</p>
-                <Link href="/auth/register">
+                <Link href="/register">
                     <p className="text-blue-600">Register</p>
                 </Link>
             </div>

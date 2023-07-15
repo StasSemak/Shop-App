@@ -1,4 +1,4 @@
-'usr client'
+'use client'
 
 import { CategoryItem } from "@/data/categories"
 import { ProductItem, getProducts } from "@/data/products";

@@ -40,8 +40,8 @@ const RegisterForm = () => {
             setRegisterData({...registerData, imageBase64: filesContent[0].content});
         }
         axios.post("http://shop-next-api.somee.com/api/users/register", registerData)
-            .then(res => {
-                router.push("/auth/register/success");
+            .then(() => {
+                router.push("/register/success");
             })
             .catch(err => {
                 console.log(err);
@@ -119,7 +119,7 @@ const RegisterForm = () => {
             </form>
             <div className="flex gap-1 mt-2">
                 <p>Already have an account?</p>
-                <Link href="/auth/login">
+                <Link href="/login">
                     <p className="text-blue-600">Login</p>
                 </Link>
             </div>

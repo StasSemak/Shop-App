@@ -9,7 +9,7 @@ const Registered = () => {
                 Registered successfully
             </p>
             <div className="flex gap-2 text-blue-600">
-                <Link href="/auth/login">
+                <Link href="/login">
                     <p className="w-20 text-right">Login</p>
                 </Link>
                 <p>|</p>

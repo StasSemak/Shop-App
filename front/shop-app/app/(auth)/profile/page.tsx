@@ -21,7 +21,7 @@ const Profile = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if(!isLogged) router.push('/auth/login');
+        if(!isLogged) router.push('/login');
         setUser(getLoggedUser());
     }, [setUser])
 
@@ -39,7 +39,7 @@ const Profile = () => {
                     <p className="text-2xl text-blue-600 font-semibold mb-1">{user.userName}</p>
                     <p className="text-sm mb-2">{user.role}</p>
                     <p className="mb-4">{user.email}</p>
-                    <Link href='/auth/logout'>
+                    <Link href='/logout'>
                         <div className="flex items-center">
                             <p className="text-blue-600">Log out</p>
                             <HeroIcon icon="ArrowRightOnRectangle" className="text-blue-600"/>
@@ -47,7 +47,7 @@ const Profile = () => {
                     </Link>
                 </div>
             </div>
-            <Link href='/auth/profile/adminpanel'>
+            <Link href='/profile/adminpanel'>
                 <div className="flex items-center">
                     <p className="text-blue-600">Admin panel</p>
                     <HeroIcon icon="Cog6Tooth" className="text-blue-600"/>
