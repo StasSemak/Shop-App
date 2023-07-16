@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 import BasketListItem from "./basketListItem";
 import useSWR, { Fetcher } from "swr";
 import axios from "axios";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { deleteItem, setItems } from "@/redux/features/basketSlice";
+import { RootState } from "@/redux/store";
 
 interface DeleteData {
     userId: number;
@@ -22,8 +25,18 @@ const Basket = () => {
     const basketFetcher: Fetcher<BasketItem[], string> = (input) => getBasket(parseInt(input));
     const { data, error } = useSWR(userId.toString(), basketFetcher);
 
+    const dispatch = useAppDispatch();
+    const itemsInRedux = useAppSelector((state: RootState) => state.basketReducer);
+
     useEffect(() => {
-        if(data) setBasket(data);
+        setBasket(itemsInRedux);
+    }, [itemsInRedux])
+
+    useEffect(() => {
+        if(data) {
+            setBasket(data);
+            dispatch(setItems(data));
+        } 
         if(error) console.log(error);
     }, [data, error, setBasket])
 
@@ -34,7 +47,19 @@ const Basket = () => {
                 productId: productId
             }
         })
-        .then(() => setBasket(basket.filter(x => x.productId !== productId)))
+        .then(() => { 
+            setBasket(basket.filter(x => x.productId !== productId));
+            dispatch(deleteItem(productId));
+        })
+        .catch(err => console.log(err));
+    }
+
+    const saveClickHandler = () => {
+        console.log(basket);
+        axios.put(`http://shop-next-api.somee.com/api/baskets`, {
+            userId: userId,
+            products: basket
+        })
         .catch(err => console.log(err));
     }
 
@@ -73,6 +98,7 @@ const Basket = () => {
                     <Button
                         size="md"
                         text="Save"
+                        onClickAction={saveClickHandler}
                     />
                 </div>
             </div>

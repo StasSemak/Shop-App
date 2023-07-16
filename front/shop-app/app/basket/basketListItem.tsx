@@ -3,6 +3,8 @@
 import HeroIcon from "@/components/icons/heroicon";
 import { BasketItem } from "@/data/basket";
 import { imageUrl } from "@/data/images";
+import { updateItem } from "@/redux/features/basketSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,6 +15,12 @@ const BasketListItem = ({basketItem, deleteHandler}:
         deleteHandler: () => void
     }) => {
     const [count, setCount] = useState<number>(basketItem.count);
+    const dispatch = useAppDispatch();
+
+    const clickAction = (value: number) => {
+        setCount(count => count + value);
+        dispatch(updateItem({productId: basketItem.productId, count: count + value}));
+    }
 
     return(
         <div className="grid grid-cols-11 items-center h-24 border border-blue-600 p-2 rounded-md">
@@ -30,7 +38,7 @@ const BasketListItem = ({basketItem, deleteHandler}:
             </div> 
             <div className="col-span-2 flex gap-1">
                 <button 
-                    onClick={() => setCount(count => count - 1)}
+                    onClick={() => clickAction(-1)}
                     disabled={count === 1}
                     className="group"
                 >
@@ -39,7 +47,7 @@ const BasketListItem = ({basketItem, deleteHandler}:
                 </button>
                 <p className="w-4 text-center">{count}</p>
                 <button 
-                    onClick={() => setCount(count => count + 1)}
+                    onClick={() => clickAction(1)}
                     disabled={count === 99}
                     className="group"
                 >

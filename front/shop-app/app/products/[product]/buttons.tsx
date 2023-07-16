@@ -13,7 +13,8 @@ const Buttons = ({id}:{id:number}) => {
         axios.post(`http://shop-next-api.somee.com/api/baskets`,{
             userId: userId,
             productId: id
-        }).catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     }
 
     const reviewClickHandler = () => {

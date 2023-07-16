@@ -15,7 +15,7 @@ const Navbar = () => {
             <Link href="/basket">
                 <HeroIcon icon="ShoppingCart" className="text-white"/>
             </Link>
-            <Link href={`/auth/${(isLogged ? "profile" : "login")}`}>
+            <Link href={`/${(isLogged ? "profile" : "login")}`}>
                 <HeroIcon icon="User" className="text-white"/>
             </Link>
         </nav>
