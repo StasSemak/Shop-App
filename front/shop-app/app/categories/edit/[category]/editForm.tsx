@@ -1,9 +1,8 @@
 'use client';
 
-import { CategoryItem, getCategory } from "@/data/categories";
+import { CategoryItem } from "@/data/categories";
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
-import useSWR, { Fetcher } from "swr";
 import { useFilePicker } from "use-file-picker";
 import Image from "next/image"
 import { imageUrl } from "@/data/images";
@@ -12,7 +11,7 @@ import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
 
-const EditForm = ({categoryId}:{categoryId:number}) => {
+const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
     const [category, setCategory] = useState<CategoryItem>({
         id: 0,
         name: '',
@@ -22,14 +21,9 @@ const EditForm = ({categoryId}:{categoryId:number}) => {
     const [isNewImage, setIsNewImage] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
 
-    const categoryFetcher: Fetcher<CategoryItem, string> = (input) => getCategory(parseInt(input));
-
-    const { data, error } = useSWR(categoryId.toString(), categoryFetcher);
-
     useEffect(() => {
-        if(data) setCategory(data);
-        if(error) console.log(error);
-    }, [data, error, setCategory]);
+        setCategory(fetchedCategory);
+    }, [setCategory]);
 
     const [openFileSelector, { filesContent, loading, errors, clear }] = useFilePicker({
         readAs: 'DataURL',

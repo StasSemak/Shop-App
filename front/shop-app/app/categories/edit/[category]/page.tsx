@@ -11,9 +11,11 @@ export async function generateMetadata({params} : {params: {category:number}}): 
     }
 }
 
-const EditCategory = ({params}:{params:{category:number}}) => {
+const EditCategory = async ({params}:{params:{category:number}}) => {
+    const category = await getCategory(params.category);
+
     return(
-        <EditForm categoryId={params.category}/>
+        <EditForm fetchedCategory={category}/>
     )
 }
 
