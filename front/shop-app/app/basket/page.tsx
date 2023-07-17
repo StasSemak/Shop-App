@@ -55,12 +55,17 @@ const Basket = () => {
     }
 
     const saveClickHandler = () => {
-        console.log(basket);
         axios.put(`http://shop-next-api.somee.com/api/baskets`, {
             userId: userId,
             products: basket
         })
         .catch(err => console.log(err));
+    }
+
+    const totalPrice = () => {
+        let sum = 0;
+        basket.forEach(item => sum += item.price * item.count);
+        return sum;
     }
 
     return(
@@ -92,7 +97,7 @@ const Basket = () => {
             <div className="flex justify-between mt-4 items-center">
                 <div className="flex gap-2">
                     <p className="text-xl">Total price:</p>
-                    <p className="text-xl font-semibold text-blue-600">13456&#8372;</p>
+                    <p className="text-xl font-semibold text-blue-600">{totalPrice()}&#8372;</p>
                 </div>
                 <div>
                     <Button
