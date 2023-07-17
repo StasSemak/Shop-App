@@ -1,8 +1,6 @@
-'use client';
-
 import { ClipLoader } from "react-spinners"
 
-const Loading = () => {
+const LoadSpinner = () => {
     return(
         <div className="h-[80vh] flex justify-center items-center">
             <ClipLoader color="#3B82F6"/>
@@ -10,4 +8,4 @@ const Loading = () => {
     ) 
 }
 
-export default Loading
+export default LoadSpinner;
