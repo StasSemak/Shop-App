@@ -1,5 +1,3 @@
-'use server';
-
 import Reviews from "@/components/reviews/reviews";
 import { imageUrl } from "@/data/images";
 import { getProduct } from "@/data/products";

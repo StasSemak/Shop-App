@@ -1,5 +1,3 @@
-'use server';
-
 import { getReviewsByProduct } from "@/data/reviews";
 import ReviewCard from "./reviewCard";
 

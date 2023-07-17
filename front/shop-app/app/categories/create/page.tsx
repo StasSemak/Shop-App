@@ -1,6 +1,5 @@
 'use client';
 
-import HeroIcon from "@/components/icons/heroicon";
 import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";

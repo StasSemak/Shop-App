@@ -1,5 +1,3 @@
-'use server'
-
 import CategoryCard from "@/components/categories/categoryCard";
 import { getCategories } from "@/data/categories";
 import Link from "next/link";
