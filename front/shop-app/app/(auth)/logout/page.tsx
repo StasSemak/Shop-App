@@ -1,27 +1,14 @@
-'use client';
+import { Metadata } from "next"
+import LogoutPage from "./logoutPage"
 
-import Button from "@/components/reusable/button";
-import { logOut } from "@/data/users";
-import { useRouter } from "next/navigation";
+export const metadata: Metadata = {
+    title: "Logout",
+    description: "End authentification session"
+}
 
 const Logout = () => {
-    const router = useRouter();
-
-    const clickHandler = () => {
-        logOut();
-        router.push('/');
-    }
-
     return(
-        <div>
-            <p className="text-xl mb-2">You surely want to log out?</p>
-            <Button
-                size="md"
-                text="Log out"
-                icon="ArrowRightOnRectangle"
-                onClickAction={clickHandler}
-            />
-        </div>
+        <LogoutPage/>
     )
 }
 

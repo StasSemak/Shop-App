@@ -1,5 +1,11 @@
 import HeroIcon from "@/components/icons/heroicon";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+    title: "Register - Success",
+    description: "Account created successfully"
+}
 
 const Registered = () => {
     return(

@@ -3,6 +3,12 @@ import Link from "next/link";
 import ListContainer from "./listContainer";
 import { getCategories } from "@/data/categories";
 import Button from "@/components/reusable/button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Admin Panel - Products",
+    description: "Manage products"
+}
 
 const ProductsPanel = async () => {
     const products = await getAllProducts();

@@ -1,74 +1,19 @@
-'use client';
+import { Metadata } from "next";
+import AddReviewPage from "./addReviewPage"
+import { getProduct } from "@/data/products";
 
-import Button from "@/components/reusable/button";
-import Select from "@/components/reusable/select";
-import { CreateReviewItem } from "@/data/reviews";
-import { getLoggedUser } from "@/data/users";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+export async function generateMetadata({params} : {params: {product:number}}): Promise<Metadata> {
+    const product = await getProduct(params.product);
+
+    return{
+        title: `Add review for ${product.name}`,
+        description: `Express your opinion about ${product.name}`
+    }
+}
 
 const AddReview = ({params} : {params: {product:number}}) => {
-    const [review, setReview] = useState<CreateReviewItem>({
-        text: '',
-        mark: 0,
-        userId: getLoggedUser().id,
-        productId: params.product
-    });
-
-    const onChangeHandler = async (e: 
-        ChangeEvent<HTMLTextAreaElement>|
-        ChangeEvent<HTMLSelectElement>) => {
-        setReview({...review, [e.target.name]: e.target.value});
-    }
-
-    const router = useRouter();
-    
-    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        axios.post("http://shop-next-api.somee.com/api/reviews", review)
-            .then(() => {
-                router.push(`/products/${review.productId}`);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-    const markValues = [1,2,3,4,5];
-    const options = markValues.map((item) => (
-        <option key={item} value={item}>{item}</option>
-    ))
-
     return(
-        <div>
-            <form onSubmit={submitHandler} className="flex flex-col gap-3">
-                <div className="flex gap-2 items-center">
-                    <p>Rating</p>
-                    <Select
-                        name="mark"
-                        onChangeAction={onChangeHandler}
-                        className="w-12"
-                    >
-                        {options}
-                    </Select>
-                </div>
-                <textarea 
-                    name="text"
-                    onChange={onChangeHandler}
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6
-                    outline-none"
-                    placeholder="Review text"    
-                />
-                <Button
-                    size="md"
-                    text="Submit"
-                    type="submit"
-                />
-            </form>
-        </div>
+        <AddReviewPage productId={params.product}/>        
     )
 }
 

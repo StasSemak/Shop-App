@@ -4,6 +4,16 @@ import { imageUrl } from "@/data/images";
 import { getProducts } from "@/data/products";
 import Link from "next/link";
 import Image from "next/image"
+import { Metadata } from "next";
+
+export async function generateMetadata({params} : {params: {category:number}}): Promise<Metadata> {
+    const category = await getCategory(params.category); 
+    
+    return{
+        title: category.name,
+        description: `Explore products from category ${category.name}`
+    }
+}
 
 async function Category ({params} : {params: {category:number}}) {
     const category = await getCategory(params.category);

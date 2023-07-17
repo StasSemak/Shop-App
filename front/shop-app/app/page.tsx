@@ -1,6 +1,12 @@
 import CategoryCard from "@/components/categories/categoryCard";
 import { getCategories } from "@/data/categories";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Shop App - Home",
+  description: "Homepage of Shop App"
+}
 
 export default async function Home() {
   const categories = await getCategories();

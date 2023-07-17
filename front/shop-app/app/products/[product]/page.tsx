@@ -4,6 +4,16 @@ import { getProduct } from "@/data/products";
 import Buttons from "./buttons";
 import Rating from "./rating";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export async function generateMetadata({params} : {params: {product:number}}): Promise<Metadata> {
+    const product = await getProduct(params.product);
+
+    return{
+        title: product.name,
+        description: `Explore and order ${product.name}`
+    }
+}
 
 async function Product ({params} : {params: {product:number}}) {
     const product = await getProduct(params.product);

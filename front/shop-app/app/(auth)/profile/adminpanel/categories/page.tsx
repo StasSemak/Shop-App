@@ -2,6 +2,12 @@ import { getCategories } from "@/data/categories"
 import Link from "next/link"
 import CategoryListItem from "./categoryListItem";
 import Button from "@/components/reusable/button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Admin Panel - Categories",
+    description: "Manage categories"
+}
 
 const CategoriesPanel = async () => {
     const categories = await getCategories();
