@@ -11,6 +11,7 @@ import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { deleteItem, setItems } from "@/redux/features/basketSlice";
 import { RootState } from "@/redux/store";
+import LoadSpinner from "@/components/reusable/loadSpinner";
 
 interface DeleteData {
     userId: number;
@@ -23,7 +24,7 @@ const Basket = () => {
     const userId = getLoggedUserId();
 
     const basketFetcher: Fetcher<BasketItem[], string> = (input) => getBasket(parseInt(input));
-    const { data, error } = useSWR(userId.toString(), basketFetcher);
+    const { data, error, isLoading } = useSWR(userId.toString(), basketFetcher);
 
     const dispatch = useAppDispatch();
     const itemsInRedux = useAppSelector((state: RootState) => state.basketReducer);
@@ -68,9 +69,11 @@ const Basket = () => {
         return sum;
     }
 
+    if(isLoading) return <LoadSpinner/>
+
     return(
         <div>
-            {basket.length === 0 &&
+            {basket.length === 0 ?
                 <div className="h-80 flex items-center justify-center flex-col gap-3">
                     <p className="text-center text-2xl
                         font-bold text-blue-600">Basket is empty</p>
@@ -82,32 +85,33 @@ const Basket = () => {
                         />
                     </Link>
                 </div>
+                :
+                <>
+                <div className="flex flex-col gap-3">
+                    {basket.map((item, index) => (
+                        <BasketListItem 
+                            key={index} 
+                            basketItem={item}
+                            deleteHandler={() => deleteItemHandler(item.productId)}
+                        />
+                    ))}
+                </div>
+                    
+                <div className="flex justify-between mt-4 items-center">
+                    <div className="flex gap-2">
+                        <p className="text-xl">Total price:</p>
+                        <p className="text-xl font-semibold text-blue-600">{totalPrice()}&#8372;</p>
+                    </div>
+                    <div>
+                        <Button
+                            size="md"
+                            text="Save"
+                            onClickAction={saveClickHandler}
+                        />
+                    </div>
+                </div>
+                </>
             }
-
-            <div className="flex flex-col gap-3">
-                {basket.map((item, index) => (
-                    <BasketListItem 
-                        key={index} 
-                        basketItem={item}
-                        deleteHandler={() => deleteItemHandler(item.productId)}
-                    />
-                ))}
-            </div>
-            
-            <div className="flex justify-between mt-4 items-center">
-                <div className="flex gap-2">
-                    <p className="text-xl">Total price:</p>
-                    <p className="text-xl font-semibold text-blue-600">{totalPrice()}&#8372;</p>
-                </div>
-                <div>
-                    <Button
-                        size="md"
-                        text="Save"
-                        onClickAction={saveClickHandler}
-                    />
-                </div>
-            </div>
-
         </div>
     )
 }

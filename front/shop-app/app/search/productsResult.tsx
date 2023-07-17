@@ -1,6 +1,7 @@
 'use client';
 
 import ProductCard from "@/components/products/productCard";
+import LoadSpinner from "@/components/reusable/loadSpinner";
 import { ProductItem, ProductSearchInput, getProductBySearchInput } from "@/data/products";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -11,12 +12,14 @@ const ProductsResult = ({input} : {input:ProductSearchInput}) => {
 
     const productsFetcher: Fetcher<ProductItem[], ProductSearchInput> = (input) => getProductBySearchInput(input);
 
-    const { data, error } = useSWR(input, productsFetcher);
+    const { data, error, isLoading } = useSWR(input, productsFetcher);
 
     useEffect(() => {
         if(data) setProducts(data);
         if(error) console.log(error);
     }, [data, error, setProducts])
+
+    if(isLoading) return <LoadSpinner/>
 
     return(
         <div>
