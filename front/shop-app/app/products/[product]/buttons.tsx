@@ -1,9 +1,11 @@
 'use client';
 
 import Button from "@/components/reusable/button";
+import Toast from "@/components/reusable/toast";
 import { getLoggedUserId } from "@/data/users";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Buttons = ({id}:{id:number}) => {
     const router = useRouter();
@@ -14,7 +16,11 @@ const Buttons = ({id}:{id:number}) => {
             userId: userId,
             productId: id
         })
-        .catch(err => console.log(err));
+        .then(() => toast.success("Product is in cart now!"))
+        .catch(err => {
+            console.log(err);
+            toast.error("We can't put this into cart, try again")
+        });
     }
 
     const reviewClickHandler = () => {
@@ -37,6 +43,7 @@ const Buttons = ({id}:{id:number}) => {
                 className="w-36"
                 onClickAction={reviewClickHandler}
             />
+            <Toast/>
         </div>
     )
 }

@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { deleteItem, setItems } from "@/redux/features/basketSlice";
 import { RootState } from "@/redux/store";
 import LoadSpinner from "@/components/reusable/loadSpinner";
+import { toast } from "react-hot-toast";
+import Toast from "@/components/reusable/toast";
 
 interface DeleteData {
     userId: number;
@@ -60,6 +62,7 @@ const BasketPage = () => {
             userId: userId,
             products: basket
         })
+        .then(() => toast.success("Basket saved!"))
         .catch(err => console.log(err));
     }
 
@@ -112,6 +115,7 @@ const BasketPage = () => {
                 </div>
                 </>
             }
+            <Toast/>
         </div>
     )
 }

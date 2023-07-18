@@ -7,6 +7,8 @@ import Link from "next/link"
 import Image from "next/image"
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Toast from "@/components/reusable/toast";
+import toast from "react-hot-toast";
 
 const CategoryListItem = ({category}:{category:CategoryItem}) => {
     const router = useRouter();
@@ -15,9 +17,11 @@ const CategoryListItem = ({category}:{category:CategoryItem}) => {
         if(confirm(`You surely want to delete category '${category.name}'?`)) {
             axios.delete(`http://shop-next-api.somee.com/api/categories/${category.id}`)
                 .then(() => {
+                    toast.success(`Category ${category.name} deleted!`)
                     router.refresh();
                 })
                 .catch(err => {
+                    toast.error(`Error deleting category ${category.name}`)
                     console.log(err);
                 })
         }
@@ -55,6 +59,7 @@ const CategoryListItem = ({category}:{category:CategoryItem}) => {
                     <HeroIcon icon="Trash" className="text-blue-600"/>
                 </button>
             </div>
+            <Toast/>
         </div>
     )
 }

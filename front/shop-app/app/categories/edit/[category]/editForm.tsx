@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
+import Toast from "@/components/reusable/toast";
+import toast from "react-hot-toast";
 
 const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
     const [category, setCategory] = useState<CategoryItem>({
@@ -38,8 +40,6 @@ const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
         setCategory({...category, [e.target.name]: e.target.value});
     }
 
-    const router = useRouter();
-
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -63,11 +63,11 @@ const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
             imageBase64: (isNewImage ? filesContent[0].content : '')
         })
         .then(() => {
-            alert(`Category ${category.name} updated successfully!`);
-            router.back();
+            toast.success(`Category ${category.name} updated successfully!`);
         })
         .catch(err => {
             console.log(err);
+            toast.error(`Error updating category ${category.name}!`)
         })
     }
 
@@ -150,6 +150,7 @@ const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
                     text="Update"
                 />
             </form>
+            <Toast/>
         </div>
     )
 }

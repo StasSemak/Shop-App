@@ -3,9 +3,11 @@
 import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
+import Toast from "@/components/reusable/toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
 import { useFilePicker } from "use-file-picker";
 
 const CreateForm = () => {
@@ -51,11 +53,10 @@ const CreateForm = () => {
 
         axios.post(`http://shop-next-api.somee.com/api/categories`, category)
             .then(() => {
-                alert(`Category ${category.name} created successfully!`);
-                router.back();
+                toast.success(`Category ${category.name} created successfully!`);
             })
             .catch(err => {
-                setErrorMessage("Error while creating category!");
+                toast.error("Error while creating category!");
                 console.log(err);
             })
     }
@@ -115,6 +116,7 @@ const CreateForm = () => {
                     text="Create"
                 />
             </form>
+            <Toast/>
         </div>
     )
 }

@@ -2,11 +2,13 @@
 
 import Button from "@/components/reusable/button";
 import Select from "@/components/reusable/select";
+import Toast from "@/components/reusable/toast";
 import { CreateReviewItem } from "@/data/reviews";
 import { getLoggedUser } from "@/data/users";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 const AddReviewPage = ({productId}:{productId:number}) => {
     const [review, setReview] = useState<CreateReviewItem>({
@@ -28,10 +30,12 @@ const AddReviewPage = ({productId}:{productId:number}) => {
         e.preventDefault();
         axios.post("http://shop-next-api.somee.com/api/reviews", review)
             .then(() => {
+                toast.success("Your review's added!")
                 router.push(`/products/${review.productId}`);
             })
             .catch(err => {
                 console.log(err);
+                toast.error("Something went wrong! Try again");
             })
     }
 
@@ -68,6 +72,7 @@ const AddReviewPage = ({productId}:{productId:number}) => {
                     type="submit"
                 />
             </form>
+            <Toast/>
         </div>
     )
 }

@@ -1,12 +1,14 @@
 'use client';
 
 import HeroIcon from "@/components/icons/heroicon";
+import Toast from "@/components/reusable/toast";
 import { imageUrl } from "@/data/images"
 import { ProductItem } from "@/data/products"
 import axios from "axios";
 import Image from "next/image"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ProductListItem = ({product}:{product:ProductItem}) => {
     const router = useRouter();
@@ -15,9 +17,11 @@ const ProductListItem = ({product}:{product:ProductItem}) => {
         if(confirm(`You surely want to delete product '${product.name}'?`)) {
             axios.delete(`http://shop-next-api.somee.com/api/products/${product.id}`)
                 .then(() => {
+                    toast.success(`Category ${product.name} deleted!`)
                     router.refresh();
                 })
                 .catch(err => {
+                    toast.error(`Error deleting category ${product.name}`)
                     console.log(err);
                 })
         }
@@ -53,6 +57,7 @@ const ProductListItem = ({product}:{product:ProductItem}) => {
                     <HeroIcon icon="Trash" className="text-blue-600"/>
                 </button>
             </div>
+            <Toast/>
         </div>
     )
 }

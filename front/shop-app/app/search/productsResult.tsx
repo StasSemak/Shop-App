@@ -2,9 +2,11 @@
 
 import ProductCard from "@/components/products/productCard";
 import LoadSpinner from "@/components/reusable/loadSpinner";
+import Toast from "@/components/reusable/toast";
 import { ProductItem, ProductSearchInput, getProductBySearchInput } from "@/data/products";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import useSWR, { Fetcher } from "swr";
 
 const ProductsResult = ({input} : {input:ProductSearchInput}) => {
@@ -16,7 +18,7 @@ const ProductsResult = ({input} : {input:ProductSearchInput}) => {
 
     useEffect(() => {
         if(data) setProducts(data);
-        if(error) console.log(error);
+        if(error) toast.error(`Something went wrong, try again!`)
     }, [data, error, setProducts])
 
     if(isLoading) return <LoadSpinner/>
@@ -33,6 +35,7 @@ const ProductsResult = ({input} : {input:ProductSearchInput}) => {
                     </Link>
                 ))}
             </div>
+            <Toast/>
         </div>
     )
 }

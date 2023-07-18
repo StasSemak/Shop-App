@@ -6,6 +6,8 @@ import useSWR, { Fetcher } from "swr";
 import Link from "next/link";
 import CategoryCard from "@/components/categories/categoryCard";
 import LoadSpinner from "@/components/reusable/loadSpinner";
+import Toast from "@/components/reusable/toast";
+import toast from "react-hot-toast";
 
 const CategoriesResult = ({input} : {input:string}) => {
     const [categories, setCategories] = useState<CategoryItem[]>([]);
@@ -16,7 +18,7 @@ const CategoriesResult = ({input} : {input:string}) => {
 
     useEffect(() => {
         if(data) setCategories(data);
-        if(error) console.log(error);
+        if(error) toast.error(`Something went wrong, try again!`)
     }, [data, error, setCategories])
 
     if(isLoading) return <LoadSpinner/>
@@ -33,6 +35,7 @@ const CategoriesResult = ({input} : {input:string}) => {
                     </Link>
                 ))}
             </div>
+            <Toast/>
         </div>
     )
 }

@@ -13,6 +13,8 @@ import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
 import Select from "@/components/reusable/select";
+import Toast from "@/components/reusable/toast";
+import toast from "react-hot-toast";
 
 const EditForm = ({categories, fetchedProduct, catId}:
     {categories:CategoryItem[], fetchedProduct:ProductItem, catId:number}) => {
@@ -82,11 +84,11 @@ const EditForm = ({categories, fetchedProduct, catId}:
             imageBase64: (isNewImage ? filesContent[0].content : '')
         })
         .then(() => {
-            alert(`Product ${product.name} updated successfully!`);
-            router.back();
+            toast.success(`Product ${product.name} updated successfully!`);
         })
         .catch(err => {
             console.log(err);
+            toast.error(`Error updating product ${product.name}`);
         })
     }
 
@@ -189,6 +191,7 @@ const EditForm = ({categories, fetchedProduct, catId}:
                     text="Update"
                 />
             </form>
+            <Toast/>
         </div>
     )
 }

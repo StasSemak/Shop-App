@@ -9,6 +9,8 @@ import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
 import Select from "@/components/reusable/select";
+import Toast from "@/components/reusable/toast";
+import toast from "react-hot-toast";
 
 const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
     const [product, setProduct] = useState({
@@ -64,11 +66,10 @@ const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
 
         axios.post(`http://shop-next-api.somee.com/api/products`, product)
             .then(() => {
-                alert(`Product ${product.name} created successfully!`);
-                router.back();
+                toast.success(`Product ${product.name} created successfully!`);
             })
             .catch(err => {
-                setErrorMessage("Error while creating product!");
+                toast.error("Error while creating product!");
                 console.log(err);
             })
     }
@@ -148,6 +149,7 @@ const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
                     text="Create"
                 />
             </form>
+            <Toast/>
         </div>
     )
 }
