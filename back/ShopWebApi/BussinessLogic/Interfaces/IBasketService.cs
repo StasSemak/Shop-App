@@ -14,5 +14,6 @@ namespace BussinessLogic.Interfaces
         Task AddProduct(int userId, int productId);
         Task RemoveProduct(int userId, int productId);
         Task Update(BasketUpdateDto model);
+        Task<IsProductInBasketDto> IsProductInBasket(int userId, int productId);
     }
 }

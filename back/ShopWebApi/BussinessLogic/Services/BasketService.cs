@@ -114,5 +114,21 @@ namespace BussinessLogic.Services
             }
             await context.SaveChangesAsync();
         }
+
+        public async Task<IsProductInBasketDto> IsProductInBasket(int userId, int productId)
+        {
+            var basket = await GetBasket(userId);
+            var basketProducts = await context.BasketProducts
+                .Where(x => x.BasketId == basket.Id)
+                .ToListAsync();
+
+            bool isInBasket = false;
+            foreach(var item in basketProducts)
+            {
+                if (item.ProductId == productId) isInBasket = true;
+            }
+
+            return new IsProductInBasketDto { IsInBasket = isInBasket };
+        }
     }
 }

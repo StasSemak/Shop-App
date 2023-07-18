@@ -71,5 +71,19 @@ namespace ShopWebApi.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpPost("product")]
+        public async Task<IActionResult> IsProductInBasket(AddRemoveDto model)
+        {
+            try
+            {
+                var isInBasket = await service.IsProductInBasket(model.UserId, model.ProductId);
+                return Ok(isInBasket);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }
