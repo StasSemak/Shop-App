@@ -10,10 +10,10 @@ function ReviewCard({review}:{review:ReviewItem}) {
             </div>
             <div className="flex mb-1">
                 {[...Array(review.mark)].map((e, i) => (
-                    <HeroIcon key={i} icon="StarIcon" solid className="text-amber-400"/>
+                    <HeroIcon key={i} icon="Star" solid className="text-amber-400"/>
                 ))}
                 {[...Array(5 - review.mark)].map((e, i) => (
-                    <HeroIcon key={i} icon="StarIcon" className="text-amber-400"/>
+                    <HeroIcon key={i} icon="Star" className="text-amber-400"/>
                 ))}
             </div>
             <p>{review.text}</p>

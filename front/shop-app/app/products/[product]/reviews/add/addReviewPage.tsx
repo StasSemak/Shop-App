@@ -2,6 +2,7 @@
 
 import Button from "@/components/reusable/button";
 import Select from "@/components/reusable/select";
+import TextArea from "@/components/reusable/textarea";
 import Toast from "@/components/reusable/toast";
 import { CreateReviewItem } from "@/data/reviews";
 import { getLoggedUser } from "@/data/users";
@@ -52,19 +53,15 @@ const AddReviewPage = ({productId}:{productId:number}) => {
                     <Select
                         name="mark"
                         onChangeAction={onChangeHandler}
-                        className="w-12"
+                        className="w-14"
                     >
                         {options}
                     </Select>
                 </div>
-                <textarea 
+                <TextArea
                     name="text"
-                    onChange={onChangeHandler}
-                    className="block w-full rounded-md border-0 py-2 px-3.5 shadow-sm ring-1 
-                    ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-                    focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6
-                    outline-none"
-                    placeholder="Review text"    
+                    onChangeAction={onChangeHandler}
+                    placeholder="Review text"
                 />
                 <Button
                     size="md"

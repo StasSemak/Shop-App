@@ -3,7 +3,6 @@ import ReviewCard from "./reviewCard";
 
 async function Reviews({productId}:{productId:number}) {
     const reviews = await getReviewsByProduct(productId);
-
     return (
         <div>
             <h2 className="text-xl mb-1">Reviews</h2>
