@@ -109,7 +109,7 @@ const BasketPage = () => {
                         <Button
                             size="md"
                             text="Save"
-                            onClickAction={saveClickHandler}
+                            onClick={saveClickHandler}
                         />
                     </div>
                 </div>

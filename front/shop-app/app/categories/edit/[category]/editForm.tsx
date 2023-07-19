@@ -107,7 +107,7 @@ const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
                                 size="sm"
                                 type="button"
                                 icon="Trash"
-                                onClickAction={() => setIsNewImage(true)}
+                                onClick={() => setIsNewImage(true)}
                             />
                         </div>
                         :
@@ -118,7 +118,7 @@ const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
                                     type="button" 
                                     text="Select"
                                     icon="FolderOpen"
-                                    onClickAction={openFileSelector}
+                                    onClick={openFileSelector}
                                 />
                             }   
                             <div>
@@ -135,7 +135,7 @@ const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
                                         <Button
                                             size="sm"
                                             type="button"
-                                            onClickAction={clear}
+                                            onClick={clear}
                                             icon="TrashIcon"
                                         />
                                     </div>

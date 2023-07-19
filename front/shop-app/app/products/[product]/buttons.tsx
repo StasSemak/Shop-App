@@ -55,11 +55,11 @@ const Buttons = ({id}:{id:number}) => {
                 </Link>
                 :
                 <Button
-                size="md"
-                text="Add to cart"
-                icon="ShoppingCart"
-                className="w-36"
-                onClickAction={cartClickHandler}
+                    size="md"
+                    text="Add to cart"
+                    icon="ShoppingCart"
+                    className="w-36"
+                    onClick={cartClickHandler}
                 />
             }
             <Button
@@ -67,7 +67,7 @@ const Buttons = ({id}:{id:number}) => {
                 text="Add review"
                 icon="Star"
                 className="w-36"
-                onClickAction={reviewClickHandler}
+                onClick={reviewClickHandler}
             />
             <Toast/>
         </div>

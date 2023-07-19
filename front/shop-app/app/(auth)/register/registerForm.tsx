@@ -87,7 +87,7 @@ const RegisterForm = () => {
                             type="button" 
                             text="Select"
                             icon="FolderOpenIcon"
-                            onClickAction={openFileSelector}
+                            onClick={openFileSelector}
                         />
                     }   
                     <div>
@@ -104,7 +104,7 @@ const RegisterForm = () => {
                                 <Button
                                     size="sm"
                                     type="button"
-                                    onClickAction={clear}
+                                    onClick={clear}
                                     icon="TrashIcon"
                                 />
                             </div>

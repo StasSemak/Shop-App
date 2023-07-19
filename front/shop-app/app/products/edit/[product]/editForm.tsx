@@ -148,7 +148,7 @@ const EditForm = ({categories, fetchedProduct, catId}:
                                 size="sm"
                                 type="button"
                                 icon="Trash"
-                                onClickAction={() => setIsNewImage(true)}
+                                onClick={() => setIsNewImage(true)}
                             />
                         </div>
                         :
@@ -159,7 +159,7 @@ const EditForm = ({categories, fetchedProduct, catId}:
                                     type="button" 
                                     text="Select"
                                     icon="FolderOpen"
-                                    onClickAction={openFileSelector}
+                                    onClick={openFileSelector}
                                 />
                             }   
                             <div>
@@ -176,7 +176,7 @@ const EditForm = ({categories, fetchedProduct, catId}:
                                         <Button
                                             size="sm"
                                             type="button"
-                                            onClickAction={clear}
+                                            onClick={clear}
                                             icon="Trash"
                                         />
                                     </div>

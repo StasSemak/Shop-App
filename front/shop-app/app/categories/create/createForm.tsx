@@ -86,7 +86,7 @@ const CreateForm = () => {
                             type="button" 
                             text="Select"
                             icon="FolderOpen"
-                            onClickAction={openFileSelector}
+                            onClick={openFileSelector}
                         />
                     }   
                     <div>
@@ -103,7 +103,7 @@ const CreateForm = () => {
                                 <Button
                                     size="sm"
                                     type="button"
-                                    onClickAction={clear}
+                                    onClick={clear}
                                     icon="Trash"
                                 />
                             </div>

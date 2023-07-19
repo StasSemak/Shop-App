@@ -19,7 +19,7 @@ const LogoutPage = () => {
                 size="md"
                 text="Log out"
                 icon="ArrowRightOnRectangle"
-                onClickAction={clickHandler}
+                onClick={clickHandler}
             />
         </div>
     )
