@@ -4,7 +4,7 @@ import Icon from "./footerIcon";
 const Footer = () => {
     return(
         <footer className="bg-blue-800 w-full h-16 flex-shrink-0 mt-4
-            flex items-center justify-between px-5">
+            flex items-center justify-between px-5 lg:px-60">
             <Link href="https://github.com/StasSemak/Shop-App" className="w-10">
                 <Icon/>
             </Link>

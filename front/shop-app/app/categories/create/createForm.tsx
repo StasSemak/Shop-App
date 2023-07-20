@@ -62,7 +62,7 @@ const CreateForm = () => {
     }
 
     return(
-        <div>
+        <div className="w-full lg:w-2/3 mx-auto">
             {errorMessage != '' &&
                 <p className="mb-2 mx-auto text-red-500">{errorMessage}</p>
             }

@@ -46,7 +46,7 @@ const AddReviewPage = ({productId}:{productId:number}) => {
     ))
 
     return(
-        <div>
+        <div className="w-full lg:w-2/3 mx-auto">
             <form onSubmit={submitHandler} className="flex flex-col gap-3">
                 <div className="flex gap-2 items-center">
                     <p>Rating</p>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const AdminPanel = async () => {
     return(
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 w-full lg:w-2/3 mx-auto">
             <Link href='adminpanel/categories'>
                 <MenuItem caption="Categories"/>
             </Link>

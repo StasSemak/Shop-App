@@ -13,8 +13,8 @@ export default async function Home() {
 
   return (
     <div className="mt-3">
-      <div className="flex flex-col items-center w-11/12 mx-auto gap-2">
-        <div className="flex flex-wrap gap-y-4 mx-auto justify-around lg:gap-x-4">
+      <div className="flex flex-col items-center mx-auto gap-2">
+        <div className="flex flex-wrap gap-y-4 mx-auto justify-around gap-4">
           {categories.map((item, index) => (
             <Link key={index} href={`/categories/${item.id}`}>
               <CategoryCard name={item.name} imagePath={item.image} />

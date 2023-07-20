@@ -76,7 +76,7 @@ const SearchFilterPage = ({fetchedCategories}:{fetchedCategories:CategoryItem[]}
     ))
 
     return(
-        <div>
+        <div className="w-full lg:w-2/3 mx-auto">
             <div className="mb-2">
                 <Link href={`/search` + (searchInput.name !== '' ? `?q=${searchInput.name}` : '')}>
                     <div className="flex items-center">

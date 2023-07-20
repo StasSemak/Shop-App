@@ -37,7 +37,7 @@ const SearchPage = () => {
     }
 
     return (
-        <div>
+        <div className="w-full lg:w-2/3 mx-auto">
             <form onSubmit={submitHandler} className="flex gap-1">
                 <Input
                     type="text"

@@ -75,7 +75,7 @@ const BasketPage = () => {
     if(isLoading) return <LoadSpinner/>
 
     return(
-        <div>
+        <div className="w-full lg:w-2/3 mx-auto">
             {basket.length === 0 ?
                 <div className="h-80 flex items-center justify-center flex-col gap-3">
                     <p className="text-center text-2xl

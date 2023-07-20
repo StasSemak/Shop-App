@@ -36,8 +36,6 @@ const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
         setProduct({...product, [e.target.name]: e.target.value});
     }
 
-    const router = useRouter();
-
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -79,7 +77,7 @@ const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
     ))
 
     return(
-        <div>
+        <div className="w-full lg:w-2/3 mx-auto">
             {errorMessage != '' &&
                 <p className="mb-2 mx-auto text-red-500">{errorMessage}</p>
             }

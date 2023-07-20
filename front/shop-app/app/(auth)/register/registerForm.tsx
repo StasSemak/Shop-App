@@ -86,7 +86,7 @@ const RegisterForm = () => {
                             size="md" 
                             type="button" 
                             text="Select"
-                            icon="FolderOpenIcon"
+                            icon="FolderOpen"
                             onClick={openFileSelector}
                         />
                     }   
@@ -105,7 +105,7 @@ const RegisterForm = () => {
                                     size="sm"
                                     type="button"
                                     onClick={clear}
-                                    icon="TrashIcon"
+                                    icon="Trash"
                                 />
                             </div>
                         ))}

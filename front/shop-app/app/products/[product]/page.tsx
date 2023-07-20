@@ -21,8 +21,8 @@ async function Product ({params} : {params: {product:number}}) {
     return(
         <div>
             <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
-            <div className="flex gap-7 mb-4">
-                <div className="w-80 h-60 relative">
+            <div className="flex gap-7 lg:gap-14 mb-4">
+                <div className="w-80 h-60 lg:w-[480px] lg:h-[360px] relative">
                     <Image
                         src={imageUrl(product.image)}
                         alt={product.name} 

@@ -26,7 +26,7 @@ const ProfilePage = () => {
     }, [setUser])
 
     return(
-        <div>
+        <div className="w-full lg:w-2/3 mx-auto">
             <div className="flex gap-4 mb-3">
                 <Image
                     src={imageUrl(user.image)}

@@ -17,7 +17,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
        <Providers>
         <body className={inter.className + " bg-blue-50 h-screen flex flex-col"}>
             <Header/>
-            <main className='mx-5 mt-2' style={{flex: "1 0 auto"}}>
+            <main className='w-11/12 lg:w-3/4 mx-auto mt-2' style={{flex: "1 0 auto"}}>
               {children}
             </main>
             <Footer/>

@@ -5,9 +5,9 @@ import Image from "next/image"
 
 const CategoryCard = ({name, imagePath} : {name:string, imagePath:string}) => {
     return(
-        <div className="flex flex-col items-center w-64 rounded-xl pb-1 
+        <div className="flex flex-col items-center w-64 lg:w-80 rounded-xl pb-1 
             hover:scale-105 transition-all">
-            <div className="w-full h-40 relative">
+            <div className="w-full h-40 lg:h-52 relative">
                 <Image
                     src={imageUrl(imagePath)}
                     alt={name}
