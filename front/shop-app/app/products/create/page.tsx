@@ -1,6 +1,7 @@
 import { getCategories } from "@/data/categories";
 import CreateForm from "./createForm";
 import { Metadata } from "next";
+import Redirect from "@/components/redirect";
 
 export const metadata: Metadata = {
     title: "Admin Panel - Create product",
@@ -11,7 +12,10 @@ const CreateProduct = async () => {
     const categories = await getCategories();
 
     return(
-        <CreateForm categories={categories}/>
+        <>
+            <Redirect/>
+            <CreateForm categories={categories}/>
+        </>
     )
 }
 

@@ -1,4 +1,5 @@
 import HeroIcon from "@/components/icons/heroicon"
+import Redirect from "@/components/redirect"
 import { Metadata } from "next"
 import Link from "next/link"
 
@@ -9,14 +10,17 @@ export const metadata: Metadata = {
 
 const AdminPanel = async () => {
     return(
-        <div className="flex flex-col gap-3 w-full lg:w-2/3 mx-auto">
-            <Link href='adminpanel/categories'>
-                <MenuItem caption="Categories"/>
-            </Link>
-            <Link href='adminpanel/products'>
-                <MenuItem caption="Products"/>
-            </Link>
-        </div>
+        <>
+            <div className="flex flex-col gap-3 w-full lg:w-2/3 mx-auto">
+                <Link href='adminpanel/categories'>
+                    <MenuItem caption="Categories"/>
+                </Link>
+                <Link href='adminpanel/products'>
+                    <MenuItem caption="Products"/>
+                </Link>
+            </div>
+            <Redirect/>
+        </>
     )
 }
 

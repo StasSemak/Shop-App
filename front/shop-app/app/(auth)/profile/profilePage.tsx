@@ -47,12 +47,14 @@ const ProfilePage = () => {
                     </Link>
                 </div>
             </div>
-            <Link href='/profile/adminpanel'>
-                <div className="flex items-center">
-                    <p className="text-blue-600">Admin panel</p>
-                    <HeroIcon icon="Cog6Tooth" className="text-blue-600"/>
-                </div>
-            </Link>
+            {user.role === "Admin" &&
+                <Link href='/profile/adminpanel'>
+                    <div className="flex items-center">
+                        <p className="text-blue-600">Admin panel</p>
+                        <HeroIcon icon="Cog6Tooth" className="text-blue-600"/>
+                    </div>
+                </Link>
+            }
         </div>
     )
 }

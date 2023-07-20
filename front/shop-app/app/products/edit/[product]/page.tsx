@@ -2,6 +2,7 @@ import { getCategories, getCategoryIdByName } from "@/data/categories";
 import EditForm from "./editForm";
 import { getProduct } from "@/data/products";
 import { Metadata } from "next";
+import Redirect from "@/components/redirect";
 
 export async function generateMetadata({params}:{params:{product:number}}): Promise<Metadata> {
     const product = await getProduct(params.product); 
@@ -18,7 +19,10 @@ const EditProduct = async ({params}:{params:{product:number}}) => {
     const categoryId = await getCategoryIdByName(product.category);
 
     return(
-        <EditForm categories={categories} fetchedProduct={product} catId={categoryId}/>
+        <>
+            <Redirect/>
+            <EditForm categories={categories} fetchedProduct={product} catId={categoryId}/>
+        </>
     )
 }
 
