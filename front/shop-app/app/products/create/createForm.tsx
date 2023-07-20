@@ -11,6 +11,7 @@ import TextArea from "@/components/reusable/textarea";
 import Select from "@/components/reusable/select";
 import Toast from "@/components/reusable/toast";
 import toast from "react-hot-toast";
+import { GLOBAL_SERVER } from "@/env/env";
 
 const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
     const [product, setProduct] = useState({
@@ -62,7 +63,7 @@ const CreateForm = ({categories}:{categories:CategoryItem[]}) => {
 
         setProduct({...product, imageBase64: filesContent[0].content});
 
-        axios.post(`http://shop-next-api.somee.com/api/products`, product)
+        axios.post(`${GLOBAL_SERVER}/api/products`, product)
             .then(() => {
                 toast.success(`Product ${product.name} created successfully!`);
             })

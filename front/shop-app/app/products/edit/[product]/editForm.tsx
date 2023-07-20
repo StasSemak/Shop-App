@@ -15,6 +15,7 @@ import TextArea from "@/components/reusable/textarea";
 import Select from "@/components/reusable/select";
 import Toast from "@/components/reusable/toast";
 import toast from "react-hot-toast";
+import { GLOBAL_SERVER } from "@/env/env";
 
 const EditForm = ({categories, fetchedProduct, catId}:
     {categories:CategoryItem[], fetchedProduct:ProductItem, catId:number}) => {
@@ -73,7 +74,7 @@ const EditForm = ({categories, fetchedProduct, catId}:
             return;
         }
 
-        axios.put(`http://shop-next-api.somee.com/api/products`,{
+        axios.put(`${GLOBAL_SERVER}/api/products`,{
             id: product.id,
             name: product.name,
             price: product.price,

@@ -9,13 +9,14 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Toast from "@/components/reusable/toast";
 import toast from "react-hot-toast";
+import { GLOBAL_SERVER } from "@/env/env";
 
 const CategoryListItem = ({category}:{category:CategoryItem}) => {
     const router = useRouter();
 
     const deleteHandler = () => {
         if(confirm(`You surely want to delete category '${category.name}'?`)) {
-            axios.delete(`http://shop-next-api.somee.com/api/categories/${category.id}`)
+            axios.delete(`${GLOBAL_SERVER}/api/categories/${category.id}`)
                 .then(() => {
                     toast.success(`Category ${category.name} deleted!`)
                     router.refresh();

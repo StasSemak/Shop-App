@@ -1,3 +1,5 @@
+import { GLOBAL_SERVER } from "@/env/env";
+
 export const imageUrl = (src:string) => {
-    return `http://shop-next-api.somee.com/images/${src}`;
+    return `${GLOBAL_SERVER}/images/${src}`;
 }

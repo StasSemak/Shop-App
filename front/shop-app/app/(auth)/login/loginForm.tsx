@@ -3,6 +3,7 @@
 import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import { LoginItem, UserItem, logIn } from "@/data/users";
+import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,7 +25,7 @@ const LoginForm = () => {
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        axios.post<UserItem>("http://shop-next-api.somee.com/api/users/login", loginData)
+        axios.post<UserItem>(`${GLOBAL_SERVER}/api/users/login`, loginData)
             .then(res => {
                 logIn(res.data);
                 router.push("/profile");

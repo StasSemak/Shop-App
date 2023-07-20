@@ -4,6 +4,7 @@ import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
 import Toast from "@/components/reusable/toast";
+import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -51,7 +52,7 @@ const CreateForm = () => {
 
         setCategory({...category, imagebase64: filesContent[0].content});
 
-        axios.post(`http://shop-next-api.somee.com/api/categories`, category)
+        axios.post(`${GLOBAL_SERVER}/api/categories`, category)
             .then(() => {
                 toast.success(`Category ${category.name} created successfully!`);
             })

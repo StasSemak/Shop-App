@@ -3,6 +3,7 @@
 import Button from "@/components/reusable/button";
 import Input from "@/components/reusable/input";
 import { RegisterItem } from "@/data/users";
+import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -39,7 +40,7 @@ const RegisterForm = () => {
         if(filesContent.length !== 0) {
             setRegisterData({...registerData, imageBase64: filesContent[0].content});
         }
-        axios.post("http://shop-next-api.somee.com/api/users/register", registerData)
+        axios.post(`${GLOBAL_SERVER}/api/users/register`, registerData)
             .then(() => {
                 router.push("/register/success");
             })

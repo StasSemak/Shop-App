@@ -4,6 +4,7 @@ import HeroIcon from "@/components/icons/heroicon";
 import Toast from "@/components/reusable/toast";
 import { imageUrl } from "@/data/images"
 import { ProductItem } from "@/data/products"
+import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import Image from "next/image"
 import Link from "next/link";
@@ -15,7 +16,7 @@ const ProductListItem = ({product}:{product:ProductItem}) => {
 
     const deleteHandler = () => {
         if(confirm(`You surely want to delete product '${product.name}'?`)) {
-            axios.delete(`http://shop-next-api.somee.com/api/products/${product.id}`)
+            axios.delete(`${GLOBAL_SERVER}/api/products/${product.id}`)
                 .then(() => {
                     toast.success(`Category ${product.name} deleted!`)
                     router.refresh();

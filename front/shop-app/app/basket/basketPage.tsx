@@ -14,6 +14,7 @@ import { RootState } from "@/redux/store";
 import LoadSpinner from "@/components/reusable/loadSpinner";
 import { toast } from "react-hot-toast";
 import Toast from "@/components/reusable/toast";
+import { GLOBAL_SERVER } from "@/env/env";
 
 interface DeleteData {
     userId: number;
@@ -44,7 +45,7 @@ const BasketPage = () => {
     }, [data, error, setBasket])
 
     const deleteItemHandler = (productId: number) => {
-        axios.delete<any, any, DeleteData>(`http://shop-next-api.somee.com/api/baskets`, {
+        axios.delete<any, any, DeleteData>(`${GLOBAL_SERVER}/api/baskets`, {
             data: {
                 userId: userId,
                 productId: productId
@@ -58,7 +59,7 @@ const BasketPage = () => {
     }
 
     const saveClickHandler = () => {
-        axios.put(`http://shop-next-api.somee.com/api/baskets`, {
+        axios.put(`${GLOBAL_SERVER}/api/baskets`, {
             userId: userId,
             products: basket
         })

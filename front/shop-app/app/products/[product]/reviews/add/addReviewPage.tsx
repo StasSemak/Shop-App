@@ -6,6 +6,7 @@ import TextArea from "@/components/reusable/textarea";
 import Toast from "@/components/reusable/toast";
 import { CreateReviewItem } from "@/data/reviews";
 import { getLoggedUser } from "@/data/users";
+import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -29,7 +30,7 @@ const AddReviewPage = ({productId}:{productId:number}) => {
     
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.post("http://shop-next-api.somee.com/api/reviews", review)
+        axios.post(`${GLOBAL_SERVER}/api/reviews`, review)
             .then(() => {
                 toast.success("Your review's added!")
                 router.push(`/products/${review.productId}`);

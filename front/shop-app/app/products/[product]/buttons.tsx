@@ -4,6 +4,7 @@ import Button from "@/components/reusable/button";
 import Toast from "@/components/reusable/toast";
 import { getIsProductInBasket } from "@/data/products";
 import { getLoggedUserId } from "@/data/users";
+import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,7 +26,7 @@ const Buttons = ({id}:{id:number}) => {
     })
 
     const cartClickHandler = () => {
-        axios.post(`http://shop-next-api.somee.com/api/baskets`,{
+        axios.post(`${GLOBAL_SERVER}/api/baskets`,{
             userId: userId,
             productId: id
         })

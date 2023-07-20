@@ -12,6 +12,7 @@ import Input from "@/components/reusable/input";
 import TextArea from "@/components/reusable/textarea";
 import Toast from "@/components/reusable/toast";
 import toast from "react-hot-toast";
+import { GLOBAL_SERVER } from "@/env/env";
 
 const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
     const [category, setCategory] = useState<CategoryItem>({
@@ -56,7 +57,7 @@ const EditForm = ({fetchedCategory}:{fetchedCategory:CategoryItem}) => {
             return;
         }
 
-        axios.put("http://shop-next-api.somee.com/api/categories", {
+        axios.put(`${GLOBAL_SERVER}/api/categories`, {
             id: category.id,
             name: category.name,
             description: category.description,
