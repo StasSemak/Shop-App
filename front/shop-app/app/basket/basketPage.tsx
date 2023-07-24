@@ -47,7 +47,7 @@ const BasketPage = () => {
     const deleteItemHandler = (productId: number) => {
         axios.delete<any, any, DeleteData>(`${GLOBAL_SERVER}/api/baskets`, {
             data: {
-                userId: userId,
+                userId: userId ?? 0,
                 productId: productId
             }
         })
