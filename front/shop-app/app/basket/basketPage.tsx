@@ -27,7 +27,7 @@ const BasketPage = () => {
     const userId = getLoggedUserId();
 
     const basketFetcher: Fetcher<BasketItem[], string> = (input) => getBasket(parseInt(input));
-    const { data, error, isLoading } = useSWR(userId.toString(), basketFetcher);
+    const { data, error, isLoading } = useSWR((userId ?? '').toString(), basketFetcher);
 
     const dispatch = useAppDispatch();
     const itemsInRedux = useAppSelector((state: RootState) => state.basketReducer);

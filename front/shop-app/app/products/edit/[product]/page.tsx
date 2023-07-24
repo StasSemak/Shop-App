@@ -20,7 +20,7 @@ const EditProduct = async ({params}:{params:{product:number}}) => {
 
     return(
         <>
-            <Redirect/>
+            <Redirect type="isAdmin"/>
             <EditForm categories={categories} fetchedProduct={product} catId={categoryId}/>
         </>
     )

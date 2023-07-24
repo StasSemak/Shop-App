@@ -35,10 +35,13 @@ export function logOut() {
 }
 
 export function getLoggedUser() {
-    return JSON.parse(localStorage.loggedUser) as UserItem;
+    const data = localStorage.loggedUser;
+    if(data === JSON.stringify({})) return undefined;
+
+    return JSON.parse(data) as UserItem;
 }
 
 export function getLoggedUserId() {
-    const user: UserItem = getLoggedUser();
-    return user.id;
+    const user = getLoggedUser();
+    if(user) return user.id;
 }

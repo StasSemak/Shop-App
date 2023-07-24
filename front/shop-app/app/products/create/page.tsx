@@ -13,7 +13,7 @@ const CreateProduct = async () => {
 
     return(
         <>
-            <Redirect/>
+            <Redirect type="isAdmin"/>
             <CreateForm categories={categories}/>
         </>
     )

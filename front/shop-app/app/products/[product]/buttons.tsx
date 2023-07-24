@@ -3,7 +3,7 @@
 import Button from "@/components/reusable/button";
 import Toast from "@/components/reusable/toast";
 import { getIsProductInBasket } from "@/data/products";
-import { getLoggedUserId } from "@/data/users";
+import { getLoggedUser, getLoggedUserId } from "@/data/users";
 import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import useSWR, { Fetcher } from "swr";
 
 const Buttons = ({id}:{id:number}) => {
     const router = useRouter();
-    const userId = getLoggedUserId();
+    const user = getLoggedUser();
     const [isInBasket, setIsInBasket] = useState<boolean>(false);
 
     const fetcher: Fetcher<boolean, string> = (input) => getIsProductInBasket(parseInt(input));
@@ -23,11 +23,16 @@ const Buttons = ({id}:{id:number}) => {
     useEffect(() => {
         if(data) setIsInBasket(data);
         if(error) console.log(error);
-    })
+    }, [])
 
     const cartClickHandler = () => {
+        if(user === undefined) {
+            toast.error("Cart accessible only for authentificated users!")
+            return;
+        }
+
         axios.post(`${GLOBAL_SERVER}/api/baskets`,{
-            userId: userId,
+            userId: user.id,
             productId: id
         })
         .then(() => toast.success("Product is in cart now!"))

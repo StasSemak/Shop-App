@@ -17,7 +17,7 @@ const EditCategory = async ({params}:{params:{category:number}}) => {
 
     return(
         <>
-            <Redirect/>
+            <Redirect type="isAdmin"/>
             <EditForm fetchedCategory={category}/>
         </>
     )

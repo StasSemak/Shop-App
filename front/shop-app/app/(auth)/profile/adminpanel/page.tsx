@@ -19,7 +19,7 @@ const AdminPanel = async () => {
                     <MenuItem caption="Products"/>
                 </Link>
             </div>
-            <Redirect/>
+            <Redirect type="isAdmin"/>
         </>
     )
 }

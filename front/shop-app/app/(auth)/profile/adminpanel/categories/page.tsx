@@ -27,7 +27,7 @@ const CategoriesPanel = async () => {
                     ))}
                 </div>
             </div>
-            <Redirect/>
+            <Redirect type="isAdmin"/>
         </>
     )
 }

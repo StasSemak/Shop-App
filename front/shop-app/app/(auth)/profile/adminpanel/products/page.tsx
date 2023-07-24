@@ -24,7 +24,7 @@ const ProductsPanel = async () => {
                 </Link>
                 <ListContainer products={products} categories={categories}/>
             </div>
-            <Redirect/>
+            <Redirect type="isAdmin"/>
         </>
     )
 }

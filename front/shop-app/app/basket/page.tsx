@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import BasketPage from "./basketPage";
+import Redirect from "@/components/redirect";
 
 export const metadata: Metadata = {
     title: "Basket",
@@ -8,7 +9,10 @@ export const metadata: Metadata = {
 
 const Basket = () => {
     return(
-        <BasketPage/>
+        <>
+            <Redirect type="isLogged"/>
+            <BasketPage/>
+        </>
     )
 }
 
