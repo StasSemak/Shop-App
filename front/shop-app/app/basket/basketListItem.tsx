@@ -23,11 +23,12 @@ const BasketListItem = ({basketItem, deleteHandler}:
     }
 
     return(
-        <div className="grid grid-cols-11 items-center h-24 border border-blue-600 p-2 rounded-md">
+        <div className="grid sm:grid-cols-11 grid-cols-5 grid-rows-2 sm:grid-rows-none items-center 
+            sm:h-24 h-32 border border-blue-600 p-2 rounded-md">
             <Link href={`/products/${basketItem.productId}`} className="col-span-3">
                 <p className="text-center hover:text-blue-600">{basketItem.name}</p>
             </Link>
-            <div className="h-20 w-32 relative col-span-3">
+            <div className="sm:h-20 sm:w-32 h-14 w-20 relative sm:col-span-3 col-span-2">
                 <Image
                     src={imageUrl(basketItem.image)}
                     alt={basketItem.name}
@@ -36,7 +37,7 @@ const BasketListItem = ({basketItem, deleteHandler}:
                     className="object-contain"
                 />
             </div> 
-            <div className="col-span-2 flex gap-1">
+            <div className="col-span-2 flex gap-1 justify-center sm:justify-start">
                 <button 
                     onClick={() => clickAction(-1)}
                     disabled={count === 1}

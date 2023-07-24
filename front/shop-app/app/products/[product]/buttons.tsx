@@ -41,7 +41,7 @@ const Buttons = ({id}:{id:number}) => {
         router.push(`/products/${id}/reviews/add`)
     }
 
-    if(isLoading) return <p>Loading...</p>
+    if(isLoading) return <p className="h-[88px]">Loading...</p>
 
     return(
         <div className="flex flex-col gap-2">

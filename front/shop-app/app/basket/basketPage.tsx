@@ -101,7 +101,7 @@ const BasketPage = () => {
                     ))}
                 </div>
                     
-                <div className="flex justify-between mt-4 items-center">
+                <div className="flex justify-between mt-4 items-center sm:flex-row flex-col sm:gap-0 gap-3">
                     <div className="flex gap-2">
                         <p className="text-xl">Total price:</p>
                         <p className="text-xl font-semibold text-blue-600">{totalPrice()}&#8372;</p>
