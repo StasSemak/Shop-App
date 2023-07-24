@@ -27,7 +27,7 @@ const ProfilePage = () => {
 
     return(
         <div className="w-full lg:w-2/3 mx-auto">
-            <div className="flex gap-4 mb-3 sm:flex-row flex-col">
+            <div className="flex gap-4 mb-3 xs:flex-row flex-col">
                 <Image
                     src={imageUrl(user.image)}
                     alt={user.userName}

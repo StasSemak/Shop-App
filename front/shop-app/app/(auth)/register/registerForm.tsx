@@ -55,7 +55,7 @@ const RegisterForm = () => {
             {errorMessage != '' &&
                 <p className="mb-2 text-red-500">{errorMessage}</p>
             }
-            <form onSubmit={submitHandler} className="flex flex-col gap-2 sm:w-2/3 sm:max-w-[680px]">
+            <form onSubmit={submitHandler} className="flex flex-col gap-2 xs:w-2/3 xs:max-w-[680px]">
                 <Input
                     type="text"
                     onChangeAction={onChangeHandler}

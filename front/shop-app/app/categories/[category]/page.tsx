@@ -21,7 +21,7 @@ async function Category ({params} : {params: {category:number}}) {
 
     return(
         <div>
-            <div className="flex gap-4 mb-4 sm:flex-row flex-col sm:items-start items-center">
+            <div className="flex gap-4 mb-4 xs:flex-row flex-col xs:items-start items-center">
                 <div className="h-32 w-52">
                     <Image
                         src={imageUrl(category.image)}
@@ -33,10 +33,10 @@ async function Category ({params} : {params: {category:number}}) {
                 </div>
                 <div>
                     <h1 className="text-4xl mb-2 font-semibold">{category.name}</h1>
-                    <p className="text-blue-600 text-center sm:text-left">{category.description}</p>
+                    <p className="text-blue-600 text-center xs:text-left">{category.description}</p>
                 </div>
             </div>
-            <div className="flex flex-row gap-2 flex-wrap sm:justify-start justify-center">
+            <div className="flex flex-row gap-2 flex-wrap xs:justify-start justify-center">
                 {products.map((item, index) => (
                     <Link key={index} href={`/products/${item.id}`}>
                         <ProductCard product={item}/>

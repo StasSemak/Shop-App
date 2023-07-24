@@ -28,7 +28,7 @@ const ProductsResult = ({input} : {input:ProductSearchInput}) => {
             <h2 className="text-xl mb-1">Products</h2>
             {products.length === 0 && 
                 <p className="text-center">Products not found</p>}
-            <div className="flex flex-row gap-2 flex-wrap sm:justify-start justify-center">
+            <div className="flex flex-row gap-2 flex-wrap xs:justify-start justify-center">
                 {products.map((item ,index) => (
                     <Link key={index} href={`/products/${item.id}`}>
                         <ProductCard product={item}/>

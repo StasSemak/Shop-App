@@ -20,9 +20,9 @@ async function Product ({params} : {params: {product:number}}) {
 
     return(
         <div>
-            <h1 className="text-3xl font-semibold sm:mb-4">{product.name}</h1>
-            <div className="flex sm:flex-row flex-col sm:gap-7 lg:gap-14 mb-4">
-                <div className="sm:w-80 h-60 lg:w-[480px] lg:h-[360px] relative">
+            <h1 className="text-3xl font-semibold xs:mb-4">{product.name}</h1>
+            <div className="flex xs:flex-row flex-col xs:gap-7 lg:gap-14 mb-4">
+                <div className="xs:w-80 h-60 lg:w-[480px] lg:h-[360px] relative mb-2">
                     <Image
                         src={imageUrl(product.image)}
                         alt={product.name} 
