@@ -73,7 +73,22 @@ const BasketPage = () => {
         return sum;
     }
 
+    
     if(isLoading) return <LoadSpinner/>
+    
+    if(userId === undefined) return(
+        <div className="h-80 flex items-center justify-center flex-col gap-3">
+            <p className="text-center text-2xl
+                font-bold text-blue-600">Basket is accessible only for authentificated users</p>
+            <Link href="/login">
+                <Button
+                    size="md"
+                    text="Log in"
+                    className="w-36"
+                />
+            </Link>
+        </div>
+    ) 
 
     return(
         <div className="w-full lg:w-2/3 mx-auto">

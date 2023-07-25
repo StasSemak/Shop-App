@@ -22,12 +22,13 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if(!isLogged) router.push('/login');
-        setUser(getLoggedUser());
+        const user = getLoggedUser();
+        if(user) setUser(user);
     }, [setUser])
 
     return(
         <div className="w-full lg:w-2/3 mx-auto">
-            <div className="flex gap-4 mb-3 xs:flex-row flex-col">
+            <div className="flex gap-4 mb-3 xxs:flex-row flex-col">
                 <Image
                     src={imageUrl(user.image)}
                     alt={user.userName}

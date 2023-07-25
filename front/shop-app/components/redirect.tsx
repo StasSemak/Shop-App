@@ -13,16 +13,17 @@ const Redirect = ({type}:Props) => {
     const [isLogged, setIsLogged] = useState<boolean>(false);
 
     useEffect(() => {
+        setIsLogged(isUserLogged());
         if(isUserLogged()){
-            setIsLogged(true)
-            setIsAdmin((getLoggedUser().role === "Admin"))
+            const user = getLoggedUser();
+            if(user) setIsAdmin((user.role === "Admin"))
         } 
-    })
+    }, [setIsAdmin, setIsLogged])
 
     const router = useRouter();
 
     if(type === "isAdmin" && !isAdmin) notFound();
-    if(type === "isLogged" && !isLogged) router.push("/login");
+    if(!isLogged) router.push("/login");
 
     return(
         <></>

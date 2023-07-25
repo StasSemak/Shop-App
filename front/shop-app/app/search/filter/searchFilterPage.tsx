@@ -101,7 +101,7 @@ const SearchFilterPage = ({fetchedCategories}:{fetchedCategories:CategoryItem[]}
                 >
                     {options}
                 </Select>
-                <div className="flex xs:justify-between xs:flex-row flex-col xs:gap-0 gap-3">
+                <div className="flex xxs:justify-between xxs:flex-row flex-col xxs:gap-0 gap-3">
                     <div className="flex gap-2 items-center ml-1">
                         <p>Price:</p>
                         <Input
@@ -109,7 +109,7 @@ const SearchFilterPage = ({fetchedCategories}:{fetchedCategories:CategoryItem[]}
                             onChangeAction={onChangeHandler}
                             name="minPrice"
                             value={searchInput.minPrice}
-                            className="xs:w-24 w-20"
+                            className="xxs:w-24 w-20"
                         />
                         <p>to</p>
                         <Input
@@ -117,7 +117,7 @@ const SearchFilterPage = ({fetchedCategories}:{fetchedCategories:CategoryItem[]}
                             onChangeAction={onChangeHandler}
                             name="maxPrice"
                             value={searchInput.maxPrice}
-                            className="xs:w-24 w-20"
+                            className="xxs:w-24 w-20"
                         />
                     </div>
                     <Button 

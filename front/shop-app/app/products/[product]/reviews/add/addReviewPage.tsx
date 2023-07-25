@@ -5,7 +5,7 @@ import Select from "@/components/reusable/select";
 import TextArea from "@/components/reusable/textarea";
 import Toast from "@/components/reusable/toast";
 import { CreateReviewItem } from "@/data/reviews";
-import { getLoggedUser } from "@/data/users";
+import { getLoggedUserId } from "@/data/users";
 import { GLOBAL_SERVER } from "@/env/env";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ const AddReviewPage = ({productId}:{productId:number}) => {
     const [review, setReview] = useState<CreateReviewItem>({
         text: '',
         mark: 0,
-        userId: getLoggedUser().id,
+        userId: getLoggedUserId() ?? 0,
         productId: productId
     });
 
