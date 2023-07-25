@@ -107,9 +107,8 @@ namespace BussinessLogic.Services
         public async Task<UserItemDto> LoginAsync(UserLoginDto model)
         {
             var user = await userManager.FindByEmailAsync(model.Email);
-            if (user == null) throw new Exception("User not found!");
 
-            if(!await userManager.CheckPasswordAsync(user, model.Password))
+            if(user == null || !await userManager.CheckPasswordAsync(user, model.Password))
             {
                 throw new Exception("Incorrect email or password!");
             }
